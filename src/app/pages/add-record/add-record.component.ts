@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {Item} from "../../models/item.model";
 import {User} from "../../models/user.model";
+import {CrudService} from "../../services/crud.service";
 
 
 @Component({
@@ -30,7 +31,7 @@ export class AddRecordComponent implements OnInit {
     }
   };
 
-  constructor() { }
+  constructor(private crud: CrudService) { }
 
   public recordForm = new FormGroup({
     name: new FormControl(''),
@@ -46,7 +47,11 @@ export class AddRecordComponent implements OnInit {
     this.newRecord = this.recordForm.value;
     this.newRecord.createdTime = new Date();
     this.newRecord.createdBy = this.actualUser;
-    console.log(this.newRecord);
+    this.crud.createItem(this.newRecord).subscribe({
+      next: (data) => console.log(data),
+      error: (err) => console.error(err),
+      complete: () => console.log('complete post')
+    });
     this.recordForm.reset();
   }
 }

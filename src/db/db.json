@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "name": "LG monitor",
+      "city": "Mezőszilas",
+      "room": "bal oldali iroda",
+      "description": "leírás",
+      "id": 1
+    },
+    {
+      "name": "Dell laptop",
+      "city": "Vajta",
+      "room": "Hátsó",
+      "description": "17 colos szürke laptop",
+      "createdTime": "2023-01-09T20:28:23.032Z",
+      "createdBy": {
+        "firstName": "Tomi",
+        "lastName": "Vargha",
+        "role": "unknown"
+      },
+      "id": 2
+    },
+    {
+      "name": "Gitár",
+      "city": "Alap",
+      "room": "Jobb oldali",
+      "description": "Egy cort gitár akkusztikus fém húros",
+      "createdTime": "2023-01-10T21:26:33.812Z",
+      "createdBy": {
+        "firstName": "Tomi",
+        "lastName": "Vargha",
+        "role": "unknown"
+      },
+      "id": 3
+    }
+  ]
+}
