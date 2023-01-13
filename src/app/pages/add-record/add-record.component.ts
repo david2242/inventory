@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {Item} from "../../models/item.model";
 import {User} from "../../models/user.model";
 import {CrudService} from "../../services/crud.service";
+import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore"
 
 
 @Component({
@@ -31,7 +32,9 @@ export class AddRecordComponent implements OnInit {
     }
   };
 
-  constructor(private crud: CrudService) { }
+  constructor(private afs: AngularFirestore) {
+
+  }
 
   public recordForm = new FormGroup({
     name: new FormControl(''),
@@ -47,11 +50,14 @@ export class AddRecordComponent implements OnInit {
     this.newRecord = this.recordForm.value;
     this.newRecord.createdTime = new Date();
     this.newRecord.createdBy = this.actualUser;
-    this.crud.createItem(this.newRecord).subscribe({
-      next: (data) => console.log(data),
-      error: (err) => console.error(err),
-      complete: () => console.log('complete post')
-    });
+    const inventory = this.afs.collection<Item>('inventory');
+    inventory.add(this.newRecord);
+    // this.crud.createItem(this.newRecord).subscribe({
+    //   next: (data) => console.log(data),
+    //   error: (err) => console.error(err),
+    //   complete: () => console.log('complete post')
+    // });
+
     this.recordForm.reset();
   }
 }

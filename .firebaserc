@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "halo-60249": {
+      "hosting": {
+        "inventory": [
+          "halo-60249"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "halo-60249"
+  }
+}

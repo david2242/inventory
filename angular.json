@@ -103,6 +103,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "inventory:build:production",
+            "firebaseProject": "halo-60249",
+            "firebaseHostingSite": "halo-60249"
+          }
         }
       }
     }
