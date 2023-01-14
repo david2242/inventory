@@ -1,2 +1,8 @@
-<app-add-record></app-add-record>
-<app-inventory-list></app-inventory-list>
+<mat-toolbar>
+  <span class="example-spacer"></span>
+  <button routerLink="/list" mat-raised-button color="primary">Lista</button>
+  <span class="example-spacer"></span>
+  <button routerLink="/addItem" mat-raised-button color="primary">Rögzítés</button>
+  <span class="example-spacer"></span>
+</mat-toolbar>
+<router-outlet></router-outlet>

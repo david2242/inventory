@@ -8,11 +8,11 @@ import {FirestoreCrudService} from "../../services/firestore-crud.service";
 
 
 @Component({
-  selector: 'app-add-record',
-  templateUrl: './add-record.component.html',
-  styleUrls: ['./add-record.component.scss']
+  selector: 'app-add-item',
+  templateUrl: './add-item.component.html',
+  styleUrls: ['./add-item.component.scss']
 })
-export class AddRecordComponent implements OnInit {
+export class AddItemComponent implements OnInit {
 
   private actualUser: User = {
     firstName: 'Tomi',

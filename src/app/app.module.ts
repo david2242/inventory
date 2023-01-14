@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {AddRecordComponent} from './pages/add-record/add-record.component';
+import {AddItemComponent} from './pages/add-item/add-item.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {InventoryListComponent} from './pages/inventory-list/inventory-list.component';
 import {HttpClientModule} from "@angular/common/http";
@@ -11,11 +11,16 @@ import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddRecordComponent,
+    AddItemComponent,
     InventoryListComponent
   ],
   imports: [
@@ -25,7 +30,11 @@ import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

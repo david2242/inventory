@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CrudService} from "../../services/crud.service";
 import {Item} from "../../models/item.model";
-import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
 import {Observable} from "rxjs";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 
