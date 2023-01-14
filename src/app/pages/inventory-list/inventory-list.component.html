@@ -1,5 +1,3 @@
-<p>inventory-list works!</p>
-<!--<p *ngFor="let item of itemList">There is a {{item.name}} in {{item.city}}</p>-->
 
 <table>
   <tr *ngFor="let item of itemListFromFire | async">
@@ -7,10 +5,10 @@
     <td>{{ item.city }}</td>
     <td>{{ item.room }}</td>
     <td>{{ item.createdBy.lastName }} {{ item.createdBy.firstName }}</td>
+    <td>{{ item.customID}}</td>
+    <td>
+      <button disabled (click)="editItem(item.customID)">Edit</button>
+      <button (click)="deleteItem(item.customID)">Delete</button>
+    </td>
   </tr>
 </table>
-<!--<ul>-->
-<!--  <li class="text" *ngFor="let item of itemListFromFire | async">-->
-<!--    {{item.name}}-->
-<!--  </li>-->
-<!--</ul>-->

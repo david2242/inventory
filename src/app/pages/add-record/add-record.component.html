@@ -17,5 +17,6 @@
     <label for="description">leírás: </label>
     <textarea name="description" id="description" cols="30" rows="10" formControlName="description"></textarea>
   </div>
-  <button type="submit">Rögzít</button>
+  <button *ngIf="!editingMode" type="submit">Hozzáad</button>
+  <button *ngIf="editingMode"  type="submit">Átír</button>
 </form>

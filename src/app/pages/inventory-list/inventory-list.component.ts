@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {CrudService} from "../../services/crud.service";
 import {Item} from "../../models/item.model";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
 import {Observable} from "rxjs";
+import {FirestoreCrudService} from "../../services/firestore-crud.service";
 
 
 @Component({
@@ -12,10 +13,19 @@ import {Observable} from "rxjs";
 })
 export class InventoryListComponent {
 
-  constructor(private firestore: AngularFirestore) {
-    this.itemListFromFire = firestore.collection('inventory').valueChanges();
+  constructor(private firestoreService: FirestoreCrudService) {
+    this.itemListFromFire = firestoreService.readAllItems();
   }
 
   public itemListFromFire?: Observable<any>;
 
+  editItem(id: string) {
+    console.log('edit item: ' + id);
+
+  }
+
+  deleteItem(id: string) {
+    console.log('delete item: ' + id)
+    this.firestoreService.deleteItem(id);
+  }
 }

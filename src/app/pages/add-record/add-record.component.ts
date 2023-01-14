@@ -4,6 +4,7 @@ import {Item} from "../../models/item.model";
 import {User} from "../../models/user.model";
 import {CrudService} from "../../services/crud.service";
 import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore"
+import {FirestoreCrudService} from "../../services/firestore-crud.service";
 
 
 @Component({
@@ -31,8 +32,9 @@ export class AddRecordComponent implements OnInit {
       role: ''
     }
   };
+  editingMode: boolean = false;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(private firestoreService: FirestoreCrudService) {
 
   }
 
@@ -44,19 +46,14 @@ export class AddRecordComponent implements OnInit {
   }) //TODO: Validator
 
   ngOnInit(): void {
+    this.editingMode = this.firestoreService.editingMode;
   }
 
   onSubmit() {
     this.newRecord = this.recordForm.value;
     this.newRecord.createdTime = new Date();
     this.newRecord.createdBy = this.actualUser;
-    const inventory = this.afs.collection<Item>('inventory');
-    inventory.add(this.newRecord);
-    // this.crud.createItem(this.newRecord).subscribe({
-    //   next: (data) => console.log(data),
-    //   error: (err) => console.error(err),
-    //   complete: () => console.log('complete post')
-    // });
+    this.firestoreService.addItem(this.newRecord)
 
     this.recordForm.reset();
   }
