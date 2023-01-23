@@ -6,6 +6,7 @@ import {AddItemComponent} from "./pages/add-item/add-item.component";
 const routes: Routes = [
   {path: 'list', component: InventoryListComponent},
   {path: 'addItem', component: AddItemComponent},
+  {path: 'item/:id', component: AddItemComponent},
   {path: '', component: InventoryListComponent}
 ];
 

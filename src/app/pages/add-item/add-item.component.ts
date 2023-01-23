@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {Item} from "../../models/item.model";
 import {User} from "../../models/user.model";
-import {CrudService} from "../../services/crud.service";
-import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore"
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -20,21 +19,23 @@ export class AddItemComponent implements OnInit {
     role: 'unknown'
   }
 
-  private newRecord: Item = {
+  private actualRecord: Item = {
     name: '',
     city: '',
     room: '',
     description: '',
-    createdTime: new Date(),
+    createdTime: new Date(), //TODO valamiért csak nanosec és sec mezők mentődnek el
     createdBy: {
       firstName: '',
       lastName: '',
       role: ''
     }
   };
-  editingMode: boolean = false;
 
-  constructor(private firestoreService: FirestoreCrudService) {
+  editMode: boolean = false;
+  private id: any;
+
+  constructor(private firestoreService: FirestoreCrudService, private route: ActivatedRoute) {
 
   }
 
@@ -45,16 +46,46 @@ export class AddItemComponent implements OnInit {
     description: new FormControl(''),
   }) //TODO: Validator
 
+  getItem() {
+      this.firestoreService.getItem(this.id).subscribe((data: any) => console.log(data));
+  };
+
+  myObserver = {
+    next: (data: any) => {
+      this.actualRecord = data;
+      this.recordForm.patchValue({
+        name: data.name,
+        city: data.city,
+        room: data.room,
+        description: data.description,
+      });
+    },
+    error: (err: any) => console.error(err),
+    complete: () => console.log('Observer got a complete notification')
+  };
+
   ngOnInit(): void {
-    this.editingMode = this.firestoreService.editingMode;
+    if (this.route.snapshot.paramMap.get('id')) {
+      this.id = this.route.snapshot.paramMap.get('id');
+      this.editMode = true;
+      this.firestoreService.getItem(this.id).subscribe(this.myObserver)
+    }
   }
 
-  onSubmit() {
-    this.newRecord = this.recordForm.value;
-    this.newRecord.createdTime = new Date();
-    this.newRecord.createdBy = this.actualUser;
-    this.firestoreService.addItem(this.newRecord)
-
+  addItem() {
+    this.actualRecord = this.recordForm.value;
+    this.actualRecord.createdTime = new Date();
+    this.actualRecord.createdBy = this.actualUser;
+    this.firestoreService.addItem(this.actualRecord)
     this.recordForm.reset();
+  }
+
+  editItem() {
+    this.actualRecord = this.recordForm.value;
+    this.actualRecord.modifiedTime = new Date();
+    this.actualRecord.modifiedBy = this.actualUser;
+    this.firestoreService.updateItem(this.id, this.actualRecord)
+      .then(() => console.log('succesfully updated ' + this.actualRecord.name))
+      .catch(err => console.error(err));
   }
 }

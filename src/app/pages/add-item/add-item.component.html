@@ -1,6 +1,6 @@
-<p>add-record works!</p>
-<h2>Új tétel</h2>
-<form [formGroup]="recordForm" (ngSubmit)="onSubmit()">
+<h2 *ngIf="!editMode">Új tétel</h2>
+<h2 *ngIf="editMode">Tétel módosítása</h2>
+<form [formGroup]="recordForm">
   <div>
     <label for="name">neve: </label>
     <input type="text" name="name" id="name" formControlName="name">
@@ -17,6 +17,6 @@
     <label for="description">leírás: </label>
     <textarea name="description" id="description" cols="30" rows="10" formControlName="description"></textarea>
   </div>
-  <button *ngIf="!editingMode" type="submit">Hozzáad</button>
-  <button *ngIf="editingMode"  type="submit">Átír</button>
+  <button *ngIf="!editMode" (click)="addItem()">Hozzáad</button>
+  <button *ngIf="editMode" (click)="editItem()">Átír</button>
 </form>

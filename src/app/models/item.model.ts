@@ -6,5 +6,7 @@ export interface Item {
   room: string,
   description: string,
   createdTime: Date,
-  createdBy: User
+  modifiedTime?: Date
+  createdBy: User,
+  modifiedBy?: User
 }

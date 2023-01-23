@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Item} from "../../models/item.model";
+import { Component } from '@angular/core';
 import {Observable} from "rxjs";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -11,15 +11,14 @@ import {FirestoreCrudService} from "../../services/firestore-crud.service";
 })
 export class InventoryListComponent {
 
-  constructor(private firestoreService: FirestoreCrudService) {
+  constructor(private firestoreService: FirestoreCrudService, private router: Router) {
     this.itemListFromFire = firestoreService.readAllItems();
   }
 
   public itemListFromFire?: Observable<any>;
 
   editItem(id: string) {
-    console.log('edit item: ' + id);
-
+    this.router.navigate(['item', id]);
   }
 
   deleteItem(id: string) {
