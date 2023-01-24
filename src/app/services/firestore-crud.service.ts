@@ -9,21 +9,20 @@ import {Observable} from "rxjs";
 export class FirestoreCrudService {
 
   private itemDoc?: AngularFirestoreDocument<Item>;
-  public editingMode: boolean = false;
 
   constructor(private firestore: AngularFirestore) { }
 
   addItem(item: Item) {
     const inventory = this.firestore.collection<Item>('inventory');
-    inventory.add(item);
+    return inventory.add(item);
   }
 
   deleteItem(id: string) {
     this.itemDoc = this.firestore.doc<Item>('inventory/' + id);
-    this.itemDoc.delete();
+    return this.itemDoc.delete();
   }
 
-  readAllItems() {
+  readAllItems(): Observable<any[]> {
     return this.firestore.collection('inventory').valueChanges({ idField: 'customID' });
   }
 

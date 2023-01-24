@@ -16,6 +16,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from "@angular/material/button";
+import {MatTableModule} from "@angular/material/table";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -23,19 +26,22 @@ import {MatButtonModule} from "@angular/material/button";
     AddItemComponent,
     InventoryListComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule
-  ],
+    imports: [
+      BrowserModule,
+      HttpClientModule,
+      AppRoutingModule,
+      ReactiveFormsModule,
+      AngularFireModule.initializeApp(environment.firebase),
+      AngularFireAuthModule,
+      AngularFirestoreModule,
+      BrowserAnimationsModule,
+      MatToolbarModule,
+      MatIconModule,
+      MatButtonModule,
+      MatTableModule,
+      MatFormFieldModule,
+      MatInputModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import {Observable} from "rxjs";
+import {Component, OnInit} from '@angular/core';
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {Router} from "@angular/router";
+import {Item} from "../../models/item.model";
 
 
 @Component({
@@ -9,13 +9,24 @@ import {Router} from "@angular/router";
   templateUrl: './inventory-list.component.html',
   styleUrls: ['./inventory-list.component.scss']
 })
-export class InventoryListComponent {
+export class InventoryListComponent implements OnInit {
 
   constructor(private firestoreService: FirestoreCrudService, private router: Router) {
-    this.itemListFromFire = firestoreService.readAllItems();
   }
 
-  public itemListFromFire?: Observable<any>;
+  public itemList!: Item[];
+
+
+  ngOnInit(): void {
+    this.firestoreService.readAllItems().subscribe({
+      next: (data) => {
+        this.itemList = data;
+        console.log(this.itemList);
+      }
+    })
+  }
+
+  displayedColumns: any = ['name', 'city', 'room', 'description', 'actions'];
 
   editItem(id: string) {
     this.router.navigate(['item', id]);
@@ -25,4 +36,5 @@ export class InventoryListComponent {
     console.log('delete item: ' + id)
     this.firestoreService.deleteItem(id);
   }
+
 }
