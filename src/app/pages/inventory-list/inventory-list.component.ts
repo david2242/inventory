@@ -26,7 +26,7 @@ export class InventoryListComponent implements OnInit {
     })
   }
 
-  displayedColumns: any = ['name', 'city', 'room', 'description', 'actions'];
+  displayedColumns: any = ['customID', 'name', 'city', 'room', 'description', 'actions'];
 
   editItem(id: string) {
     this.router.navigate(['item', id]);

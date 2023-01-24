@@ -1,22 +1,11 @@
-
-<!--<table>-->
-<!--  <tr *ngFor="let item of itemListFromFire | async">-->
-<!--    <td>{{ item.name }}</td>-->
-<!--    <td>{{ item.city }}</td>-->
-<!--    <td>{{ item.room }}</td>-->
-<!--    <td>{{ item.createdBy.lastName }} {{ item.createdBy.firstName }}</td>-->
-<!--    <td>{{ item.customID}}</td>-->
-<!--    <td>-->
-<!--      <button (click)="editItem(item.customID)">Edit</button>-->
-<!--      <button (click)="deleteItem(item.customID)">Delete</button>-->
-<!--    </td>-->
-<!--  </tr>-->
-<!--</table>-->
-
 <table mat-table [dataSource]="itemList" class="mat-elevation-z8">
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
+  <ng-container matColumnDef="customID">
+    <th mat-header-cell *matHeaderCellDef> Azonosító </th>
+    <td mat-cell *matCellDef="let item"> {{item.customID}} </td>
+  </ng-container>
 
   <!-- Position Column -->
   <ng-container matColumnDef="name">
@@ -54,3 +43,5 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<zxing-scanner></zxing-scanner>

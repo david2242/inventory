@@ -40,6 +40,7 @@ export class AddItemComponent implements OnInit {
   }
 
   public recordForm = new FormGroup({
+    customID: new FormControl({value: '', disabled: true}),
     name: new FormControl(''),
     city: new FormControl(''),
     room: new FormControl(''),
@@ -54,6 +55,7 @@ export class AddItemComponent implements OnInit {
     next: (data: any) => {
       this.actualRecord = data;
       this.recordForm.patchValue({
+        customID: this.id,
         name: data.name,
         city: data.city,
         room: data.room,
