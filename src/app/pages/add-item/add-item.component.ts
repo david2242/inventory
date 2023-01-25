@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 import {Item} from "../../models/item.model";
 import {User} from "../../models/user.model";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
@@ -39,12 +39,12 @@ export class AddItemComponent implements OnInit {
 
   }
 
-  public recordForm = new FormGroup({
-    customID: new FormControl({value: '', disabled: true}),
-    name: new FormControl(''),
-    city: new FormControl(''),
-    room: new FormControl(''),
-    description: new FormControl(''),
+  public recordForm = new UntypedFormGroup({
+    customID: new UntypedFormControl({value: '', disabled: true}),
+    name: new UntypedFormControl(''),
+    city: new UntypedFormControl(''),
+    room: new UntypedFormControl(''),
+    description: new UntypedFormControl(''),
   }) //TODO: Validator
 
   getItem() {
