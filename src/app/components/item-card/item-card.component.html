@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>{{data.name}}</h1>
+<div mat-dialog-content>
+  <table>
+    <tr>
+      <td>Település: </td>
+      <td>{{data.city}}</td>
+    </tr>
+    <tr>
+      <td>Leírás: </td>
+      <td>{{data.description}}</td>
+    </tr>
+    <tr>
+      <td>Létrehozta: </td>
+      <td>{{data.createdBy.firstName}}</td>
+    </tr>
+    <tr>
+      <td>Létrehozás ideje: </td>
+      <td>{{data.createdTime.toDate().toLocaleString()}}</td>
+    </tr>
+    <tr>
+      <td>Utoljára módosította: </td>
+      <td *ngIf="data.modifiedBy">{{data.modifiedBy.firstName}}</td>
+      <td *ngIf="!data.modifiedBy">-</td>
+    </tr>
+    <tr>
+      <td>Módosítás ideje: </td>
+      <td *ngIf="data.modifiedTime">{{data.modifiedTime!.toDate().toLocaleString()}}</td>
+      <td *ngIf="!data.modifiedTime">-</td>
+    </tr>
+  </table>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial>Ok</button>
+</div>
+
