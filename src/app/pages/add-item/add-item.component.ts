@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UntypedFormControl, UntypedFormGroup} from "@angular/forms";
-import {Item} from "../../models/item.model";
+import {City, Item} from "../../models/item.model";
 import {User} from "../../models/user.model";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {ActivatedRoute} from "@angular/router";
@@ -21,7 +21,7 @@ export class AddItemComponent implements OnInit {
 
   private actualRecord: Item = {
     name: '',
-    city: '',
+    city: City.SAREGRES,
     room: '',
     description: '',
     createdTime: new Date(), //TODO valamiért csak nanosec és sec mezők mentődnek el - mert ez nem date hanem Timestamp
@@ -39,6 +39,7 @@ export class AddItemComponent implements OnInit {
 
   }
 
+  //TODO: Ez mi a szar
   public recordForm = new UntypedFormGroup({
     customID: new UntypedFormControl({value: '', disabled: true}),
     name: new UntypedFormControl(''),

@@ -22,6 +22,8 @@ import {ZXingScannerModule} from "@zxing/ngx-scanner";
 import {ScannerComponent} from "./components/scanner/scanner.component";
 import {ItemCardComponent} from './components/item-card/item-card.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatSelectModule} from '@angular/material/select';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatInputModule,
     ZXingScannerModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {Router} from "@angular/router";
-import {Item} from "../../models/item.model";
+import {City, Item} from "../../models/item.model";
 import {DialogService} from "../../services/dialog.service";
 
 
@@ -19,15 +19,19 @@ export class InventoryListComponent implements OnInit {
   }
 
   public itemList!: Item[];
+  public listToShow = this.itemList;
+  public cities: City[] = Object.values(City);
+  public scrapped = true;
+  public cityOption?: City;
 
 
   ngOnInit(): void {
     this.firestoreService.readAllItems().subscribe({
       next: (data) => {
         this.itemList = data;
-        console.log(this.itemList);
+        this.listToShow = this.itemList;
       }
-    })
+    });
   }
 
   displayedColumns: any = ['name', 'city', 'room', 'description', 'actions', 'state'];
@@ -53,5 +57,10 @@ export class InventoryListComponent implements OnInit {
   openDialog(item: Item) {
     console.log(item);
     this.dialogService.openDialog(item, false);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toUpperCase();
   }
 }

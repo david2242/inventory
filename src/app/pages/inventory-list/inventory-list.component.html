@@ -1,4 +1,23 @@
-<table mat-table [dataSource]="itemList" class="mat-elevation-z8">
+<div class="filters">
+  <mat-form-field appearance="fill">
+    <mat-label>Település</mat-label>
+    <mat-select (valueChange)="applyFilter($event)">
+      <mat-option *ngFor="let city of cities" [value]="city">
+        {{city}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="slide">
+    <span class="mat-caption" [ngClass]="{'show-scrapped': scrapped}">Selejtezett</span>
+    <mat-slide-toggle
+      [(ngModel)]=scrapped
+      class="example-margin">
+    </mat-slide-toggle>
+    <span class="mat-caption" [ngClass]="{'show-scrapped': !scrapped}">Aktív</span>
+  </div>
+</div>
+
+<table mat-table [dataSource]="listToShow" class="mat-elevation-z8">
   <ng-container matColumnDef="customID">
     <th mat-header-cell *matHeaderCellDef> Azonosító </th>
     <td mat-cell *matCellDef="let item" (click)="openDialog(item)"> {{item.customID}} </td>

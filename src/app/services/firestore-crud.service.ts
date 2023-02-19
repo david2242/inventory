@@ -22,7 +22,7 @@ export class FirestoreCrudService {
     return this.itemDoc.delete();
   }
 
-  readAllItems(): Observable<Item[]> {
+  readAllItems(): Observable<any> {
     return this.firestore.collection('inventory').valueChanges({ idField: 'customID' })
   }
 
