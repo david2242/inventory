@@ -1,6 +1,8 @@
 :host {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 table {
   width: 80%;
@@ -9,4 +11,9 @@ table {
 
 button {
   margin-right: 5px;
+}
+
+zxing-scanner {
+  margin-top: 50px;
+  width: 70%;
 }

@@ -2,6 +2,10 @@
 <h2 *ngIf="editMode">Tétel módosítása</h2>
 
 <form [formGroup]="recordForm">
+  <mat-form-field *ngIf="editMode" appearance="fill" class="example-full-width">
+    <mat-label>Azonosító: </mat-label>
+    <input matInput readonly type="text" name="customID" id="customID" formControlName="customID">
+  </mat-form-field>
   <mat-form-field appearance="fill" class="example-full-width">
     <mat-label>neve: </mat-label>
     <input matInput  type="text" name="name" id="name" formControlName="name">

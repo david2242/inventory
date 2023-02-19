@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 import {Item} from "../../models/item.model";
 import {User} from "../../models/user.model";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
@@ -24,7 +24,7 @@ export class AddItemComponent implements OnInit {
     city: '',
     room: '',
     description: '',
-    createdTime: new Date(), //TODO valamiért csak nanosec és sec mezők mentődnek el
+    createdTime: new Date(), //TODO valamiért csak nanosec és sec mezők mentődnek el - mert ez nem date hanem Timestamp
     createdBy: {
       firstName: '',
       lastName: '',
@@ -39,11 +39,12 @@ export class AddItemComponent implements OnInit {
 
   }
 
-  public recordForm = new FormGroup({
-    name: new FormControl(''),
-    city: new FormControl(''),
-    room: new FormControl(''),
-    description: new FormControl(''),
+  public recordForm = new UntypedFormGroup({
+    customID: new UntypedFormControl({value: '', disabled: true}),
+    name: new UntypedFormControl(''),
+    city: new UntypedFormControl(''),
+    room: new UntypedFormControl(''),
+    description: new UntypedFormControl(''),
   }) //TODO: Validator
 
   getItem() {
@@ -54,6 +55,7 @@ export class AddItemComponent implements OnInit {
     next: (data: any) => {
       this.actualRecord = data;
       this.recordForm.patchValue({
+        customID: this.id,
         name: data.name,
         city: data.city,
         room: data.room,
@@ -77,6 +79,8 @@ export class AddItemComponent implements OnInit {
     this.actualRecord.createdTime = new Date();
     this.actualRecord.createdBy = this.actualUser;
     this.firestoreService.addItem(this.actualRecord)
+      .then(() => console.log('Successfully added item: ' + this.actualRecord))
+      .catch((err) => console.error(err));
     this.recordForm.reset();
   }
 
@@ -86,6 +90,6 @@ export class AddItemComponent implements OnInit {
     this.actualRecord.modifiedBy = this.actualUser;
     this.firestoreService.updateItem(this.id, this.actualRecord)
       .then(() => console.log('succesfully updated ' + this.actualRecord.name))
-      .catch(err => console.error(err));
+      .catch((err: any) => console.error(err));
   }
 }
