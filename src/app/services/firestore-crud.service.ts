@@ -22,8 +22,8 @@ export class FirestoreCrudService {
     return this.itemDoc.delete();
   }
 
-  readAllItems(): Observable<any[]> {
-    return this.firestore.collection('inventory').valueChanges({ idField: 'customID' });
+  readAllItems(): Observable<Item[]> {
+    return this.firestore.collection('inventory').valueChanges({ idField: 'customID' })
   }
 
   getItem(id: string): Observable<Item | undefined> {

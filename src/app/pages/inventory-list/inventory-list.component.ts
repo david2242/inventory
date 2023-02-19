@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {Router} from "@angular/router";
 import {Item} from "../../models/item.model";
+import {DialogService} from "../../services/dialog.service";
 
 
 @Component({
@@ -11,7 +12,10 @@ import {Item} from "../../models/item.model";
 })
 export class InventoryListComponent implements OnInit {
 
-  constructor(private firestoreService: FirestoreCrudService, private router: Router) {
+  constructor(
+    private firestoreService: FirestoreCrudService,
+    private router: Router,
+    private dialogService: DialogService) {
   }
 
   public itemList!: Item[];
@@ -26,7 +30,8 @@ export class InventoryListComponent implements OnInit {
     })
   }
 
-  displayedColumns: any = ['customID', 'name', 'city', 'room', 'description', 'actions'];
+  displayedColumns: any = ['name', 'city', 'room', 'description', 'actions', 'state'];
+  showScanner?: boolean;
 
   editItem(id: string) {
     this.router.navigate(['item', id]);
@@ -37,4 +42,16 @@ export class InventoryListComponent implements OnInit {
     this.firestoreService.deleteItem(id);
   }
 
+  toggleShowScanner() {
+    this.showScanner = !this.showScanner;
+  }
+
+  scanDone(itemID: string) {
+    this.toggleShowScanner();
+  }
+
+  openDialog(item: Item) {
+    console.log(item);
+    this.dialogService.openDialog(item, false);
+  }
 }
