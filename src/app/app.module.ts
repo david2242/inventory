@@ -26,6 +26,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {NgxKjuaModule} from 'ngx-kjua';
+import { QrGenerateComponent } from './components/pages/qr-generate/qr-generate.component';
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     AddItemComponent,
     InventoryListComponent,
     ScannerComponent,
-    ItemCardComponent
+    ItemCardComponent,
+    QrGenerateComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatSlideToggleModule,
     MatSnackBarModule,
     ZXingScannerModule,
+    FormsModule,
+    MatDialogModule,
+    NgxKjuaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

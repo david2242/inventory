@@ -1,0 +1,14 @@
+
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.items {
+  margin: 20px 20px 35px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
