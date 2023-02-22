@@ -36,6 +36,7 @@ export class ScannerComponent {
     }}
     )
     console.log('scanSuccess ran! ' + event);
+
   }
 
   scanFailure(event: any) {

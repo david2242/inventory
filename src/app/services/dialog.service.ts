@@ -11,6 +11,7 @@ export class DialogService {
   constructor(private dialog: MatDialog) { }
 
   openDialog(item: Item, scanned: boolean): void {
+    console.log('futás');
     const dialogRef = this.dialog.open(ItemCardComponent, {
       data: item, //TODO: a dialoghoz hozzá kellene adni, hogy szkennelés történt-e, és akkor lehet hozzáadni a leltár-eredményhez
     });

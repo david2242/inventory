@@ -1,7 +1,7 @@
 <div class="filters">
   <mat-form-field appearance="fill">
     <mat-label>Település</mat-label>
-    <mat-select (valueChange)="applyFilter($event)">
+    <mat-select (valueChange)="applyFilter(select.value)" #select>
       <mat-option *ngFor="let city of cities" [value]="city">
         {{city}}
       </mat-option>
@@ -43,7 +43,6 @@
     <td mat-cell *matCellDef="let item">
         <button mat-stroked-button color="accent" (click)="editItem(item.customID)">Szerkeszt</button>
         <button mat-stroked-button color="warn" (click)="deleteItem(item.customID)">Töröl</button>
-        <button mat-stroked-button color="primary" (click)="toggleShowScanner()">Kamera</button>
     </td>
   </ng-container>
   <ng-container matColumnDef="state">
@@ -53,4 +52,5 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<app-scanner *ngIf="showScanner" (scanDone)="toggleShowScanner()"></app-scanner>
+<button class="show-camera-button" mat-stroked-button color="primary" (click)="toggleShowScanner()">Szkennelés</button>
+<app-scanner *ngIf="showScanner" (scanDone)="scanDone($event)"></app-scanner>

@@ -20,5 +20,6 @@ export class ItemCardComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.data);
+    //TODO: why open 2x
   }
 }
