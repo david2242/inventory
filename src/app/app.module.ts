@@ -7,7 +7,7 @@ import {AddItemComponent} from './pages/add-item/add-item.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InventoryListComponent} from './pages/inventory-list/inventory-list.component';
 import {HttpClientModule} from "@angular/common/http";
-import {environment} from '../environments/environment';
+import {environment} from '../environments/environment.prod';
 import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
@@ -26,6 +26,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {NgxKjuaModule} from 'ngx-kjua';
+import { QrGenerateComponent } from './pages/qr-generate/qr-generate.component';
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     AddItemComponent,
     InventoryListComponent,
     ScannerComponent,
-    ItemCardComponent
+    ItemCardComponent,
+    QrGenerateComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatSlideToggleModule,
     MatSnackBarModule,
     ZXingScannerModule,
+    FormsModule,
+    MatDialogModule,
+    NgxKjuaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

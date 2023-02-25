@@ -1,0 +1,25 @@
+
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.items {
+  margin: 20px 20px 35px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.filters {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  .mat-caption {
+    margin: 10px;
+  }
+}

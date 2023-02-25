@@ -4,10 +4,6 @@ import {Router} from "@angular/router";
 import {City, Item} from "../../models/item.model";
 import {DialogService} from "../../services/dialog.service";
 
-interface cityOption {
-
-}
-
 @Component({
   selector: 'app-inventory-list',
   templateUrl: './inventory-list.component.html',
@@ -85,7 +81,7 @@ export class InventoryListComponent implements OnInit {
 
     if (active) {
       this.listToShow = this.listToShow.filter(item => item.active)
-    } else this.listToShow = this.listToShow.filter(item => item.active == false)
+    } else this.listToShow = this.listToShow.filter(item => item.active)
   }
 
   private markItemScanned(itemID: string) {

@@ -1,3 +1,8 @@
+@use '@angular/material' as mat;
+
+// Use the default configuration.
+$my-typography: mat.define-typography-config();
+@include mat.typography-hierarchy($my-typography);
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
