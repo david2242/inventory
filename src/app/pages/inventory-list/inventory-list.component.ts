@@ -25,10 +25,17 @@ export class InventoryListComponent implements OnInit {
   public itemList!: Item[];
   public listToShow = this.itemList;
   public cities: Array<City | ''> = Object.values(City);
+  stockedThisYear(item: Item): boolean {
+    console.log(item.stockTaking);
+    console.log(String((new Date).getFullYear()));
+    if (item.stockTaking){
+      return !!item.stockTaking.filter((date: string) => date.startsWith(String((new Date).getFullYear()))).length;
+    } else return false;
+  }
 
 
 
-  public scrapped = true;
+  public active = true;
   public cityOption?: City;
 
 
@@ -37,6 +44,7 @@ export class InventoryListComponent implements OnInit {
       next: (data) => {
         this.itemList = data;
         this.listToShow = this.itemList;
+        this.applyFilter(this.cityOption, this.active);
       }
     });
   }
@@ -67,12 +75,16 @@ export class InventoryListComponent implements OnInit {
     this.dialogService.openDialog(item, false);
   }
 
-  applyFilter(city: string) {
-    if (city == '') {
+  applyFilter(city: City | undefined, active: boolean) {
+    if (!city) {
       this.listToShow = this.itemList;
     } else {
       this.listToShow = this.itemList.filter(item => item.city == city);
     }
+
+    if (active) {
+      this.listToShow = this.listToShow.filter(item => item.active)
+    } else this.listToShow = this.listToShow.filter(item => item.active == false)
   }
 
   private markItemScanned(itemID: string) {

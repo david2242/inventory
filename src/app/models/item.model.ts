@@ -2,14 +2,16 @@ import {User} from "./user.model";
 
 export interface Item {
   customID?: string
+  active: boolean
   name: string,
   city: City,
   room: string,
   description: string,
-  createdTime: any,
+  createdTime?: any,
   modifiedTime?: any,
-  createdBy: User,
-  modifiedBy?: User
+  createdBy?: User,
+  modifiedBy?: User,
+  stockTaking?: string[]
 }
 
 export enum City {

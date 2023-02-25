@@ -1,35 +1,36 @@
-<h1 mat-dialog-title>{{data.name}}</h1>
+<h1 mat-dialog-title>{{data.item.name}}</h1>
 <div mat-dialog-content>
   <table>
     <tr>
       <td>Település: </td>
-      <td>{{data.city}}</td>
+      <td>{{data.item.city}}</td>
     </tr>
     <tr>
       <td>Leírás: </td>
-      <td>{{data.description}}</td>
+      <td>{{data.item.description}}</td>
     </tr>
     <tr>
       <td>Létrehozta: </td>
-      <td>{{data.createdBy.firstName}}</td>
+      <td>{{data.item.createdBy.firstName}}</td>
     </tr>
     <tr>
       <td>Létrehozás ideje: </td>
-      <td>{{data.createdTime.toDate().toLocaleString()}}</td>
+      <td>{{data.item.createdTime.toDate().toLocaleString()}}</td>
     </tr>
     <tr>
       <td>Utoljára módosította: </td>
-      <td *ngIf="data.modifiedBy">{{data.modifiedBy.firstName}}</td>
-      <td *ngIf="!data.modifiedBy">-</td>
+      <td *ngIf="data.item.modifiedBy">{{data.item.modifiedBy.firstName}}</td>
+      <td *ngIf="!data.item.modifiedBy">-</td>
     </tr>
     <tr>
       <td>Módosítás ideje: </td>
-      <td *ngIf="data.modifiedTime">{{data.modifiedTime!.toDate().toLocaleString()}}</td>
-      <td *ngIf="!data.modifiedTime">-</td>
+      <td *ngIf="data.item.modifiedTime">{{data.item.modifiedTime!.toDate().toLocaleString()}}</td>
+      <td *ngIf="!data.item.modifiedTime">-</td>
     </tr>
   </table>
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]="data.item.name" cdkFocusInitial>Ok</button>
+  <button *ngIf="data.scanned" mat-button (click)="pushToStocked()">Leltárba</button>
 </div>
 

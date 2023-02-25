@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {UntypedFormControl, UntypedFormGroup} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {City, Item} from "../../models/item.model";
 import {User} from "../../models/user.model";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {ActivatedRoute} from "@angular/router";
+import {UNKNOWN_ERROR_CODE} from "@angular/compiler-cli";
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -21,7 +23,8 @@ export class AddItemComponent implements OnInit {
 
   private actualRecord: Item = {
     name: '',
-    city: City.SAREGRES,
+    customID: undefined,
+    city: City.CECE,
     room: '',
     description: '',
     createdTime: new Date(), //TODO valamiért csak nanosec és sec mezők mentődnek el - mert ez nem date hanem Timestamp
@@ -29,8 +32,9 @@ export class AddItemComponent implements OnInit {
       firstName: '',
       lastName: '',
       role: ''
-    }
-  };
+    },
+    active: true
+  }
 
   editMode: boolean = false;
   private id: any;
@@ -40,12 +44,13 @@ export class AddItemComponent implements OnInit {
   }
 
   //TODO: Ez mi a szar
-  public recordForm = new UntypedFormGroup({
-    customID: new UntypedFormControl({value: '', disabled: true}),
-    name: new UntypedFormControl(''),
-    city: new UntypedFormControl(''),
-    room: new UntypedFormControl(''),
-    description: new UntypedFormControl(''),
+  public recordForm = new FormGroup({
+    customID: new FormControl<string | undefined>(undefined, {nonNullable: true}),
+    name: new FormControl<string>('', {nonNullable: true}),
+    city: new FormControl<City>(City.CECE, {nonNullable: true}),
+    room: new FormControl<string>('', {nonNullable: true}),
+    description: new FormControl<string>('', {nonNullable: true}),
+    active: new FormControl<boolean>(true, {nonNullable: true}),
   }) //TODO: Validator
 
   getItem() {
@@ -53,7 +58,7 @@ export class AddItemComponent implements OnInit {
   };
 
   myObserver = {
-    next: (data: any) => {
+    next: (data: Item) => {
       this.actualRecord = data;
       this.recordForm.patchValue({
         customID: this.id,

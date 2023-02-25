@@ -24,6 +24,7 @@ import {ItemCardComponent} from './components/item-card/item-card.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -43,17 +44,18 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     AngularFireAuthModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
-    ZXingScannerModule,
-    FormsModule,
+    MatCheckboxModule,
     MatDialogModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    ZXingScannerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
