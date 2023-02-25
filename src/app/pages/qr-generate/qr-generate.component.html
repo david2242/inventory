@@ -1,0 +1,20 @@
+<div class="filters">
+  <mat-form-field appearance="fill">
+    <mat-label>Település</mat-label>
+    <mat-select (valueChange)="applyFilter(select.value)" #select>
+      <mat-option *ngFor="let city of cities" [value]="city">
+        {{city}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="container">
+  <div class="items" *ngFor="let item of listToShow">
+    <ngx-kjua
+      [text]="item.customID"
+    ></ngx-kjua>
+    <span>{{item.customID}}</span>
+    <p class="mat-h2">{{item.name}}</p>
+  </div>
+</div>

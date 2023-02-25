@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {InventoryListComponent} from "./pages/inventory-list/inventory-list.component";
 import {AddItemComponent} from "./pages/add-item/add-item.component";
-import {QrGenerateComponent} from "./components/pages/qr-generate/qr-generate.component";
+import {QrGenerateComponent} from "./pages/qr-generate/qr-generate.component";
 
 const routes: Routes = [
   {path: 'list', component: InventoryListComponent},
