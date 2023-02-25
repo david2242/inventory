@@ -2,6 +2,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {Item} from "../../models/item.model";
 import {DialogService} from "../../services/dialog.service";
+import {first, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-scanner',
@@ -11,8 +12,9 @@ import {DialogService} from "../../services/dialog.service";
 export class ScannerComponent {
   loading: boolean = true;
   @Output() scanDone = new EventEmitter;
+  getItemSubscription?: Subscription;
 
-  constructor(private firestoreService: FirestoreCrudService, private dialogService: DialogService ) {
+  constructor(private firestoreService: FirestoreCrudService, private dialogService: DialogService) {
   }
 
   camerasFound(event: any) {
@@ -26,14 +28,15 @@ export class ScannerComponent {
 
   scanSuccess(event: any) {
     let scannedItem: Item | undefined;
-    this.firestoreService.getItem(event).subscribe({
-      next: (data) => {
-        scannedItem = data;
-        if (scannedItem) {
-          this.dialogService.openDialog(scannedItem, true);
-          this.scanDone?.emit(event);
+    this.firestoreService.getItem(event).pipe(first()).subscribe({
+        next: (data) => {
+          scannedItem = data;
+          if (scannedItem) {
+            this.dialogService.openDialog(scannedItem, true);
+            this.scanDone?.emit(event);
+          }
         }
-    }}
+      }
     )
     console.log('scanSuccess ran! ' + event);
   }

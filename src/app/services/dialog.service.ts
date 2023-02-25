@@ -11,12 +11,12 @@ export class DialogService {
   constructor(private dialog: MatDialog) { }
 
   openDialog(item: Item, scanned: boolean): void {
-    const dialogRef = this.dialog.open(ItemCardComponent, {
-      data: item, //TODO: a dialoghoz hozzá kellene adni, hogy szkennelés történt-e, és akkor lehet hozzáadni a leltár-eredményhez
-    });
+    this.dialog.open(ItemCardComponent, {
+      data: {
+        item: item,
+        scanned: scanned
+      }, //TODO: a dialoghoz hozzá kellene adni, hogy szkennelés történt-e, és akkor lehet hozzáadni a leltár-eredményhez
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 

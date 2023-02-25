@@ -22,6 +22,10 @@ import {ZXingScannerModule} from "@zxing/ngx-scanner";
 import {ScannerComponent} from "./components/scanner/scanner.component";
 import {ItemCardComponent} from './components/item-card/item-card.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatSelectModule} from '@angular/material/select';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -41,15 +45,19 @@ import {MatDialogModule} from "@angular/material/dialog";
     AngularFireAuthModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
     ZXingScannerModule,
-    FormsModule,
-    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

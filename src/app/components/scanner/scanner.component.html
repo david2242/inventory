@@ -1,11 +1,11 @@
 <span *ngIf="loading">Kamera betöltése...</span>
 <zxing-scanner
-  (scanFailure)="scanFailure($event)"
-  (camerasFound)="camerasFound($event)"
-  (camerasNotFound)="camerasNotFound($event)"
   (scanSuccess)="scanSuccess($event)"
-  (scanError)="scanError($event)"
-  (scanComplete)="scanComplete($event)"
 >
+<!--  (scanFailure)="scanFailure($event)"-->
+<!--  (camerasFound)="camerasFound($event)"-->
+<!--  (camerasNotFound)="camerasNotFound($event)"-->
+<!--  (scanError)="scanError($event)"-->
+<!--  (scanComplete)="scanComplete($event)"-->
 </zxing-scanner>
 <!--  [formats]="formatsEnabled"-->

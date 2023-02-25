@@ -17,3 +17,22 @@ zxing-scanner {
   margin-top: 50px;
   width: 70%;
 }
+
+.filters {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  .mat-caption {
+    margin: 10px;
+  }
+}
+
+.show-scrapped {
+  visibility: hidden;
+}
+
+.show-camera-button {
+  margin: 10px;
+}
