@@ -19,9 +19,10 @@ export class InventoryListComponent implements OnInit {
     private firestoreService: FirestoreCrudService,
     private router: Router,
     private dialogService: DialogService) {
-    this.cities.unshift('');
+      this.cities.unshift('');
   }
 
+  public thisYear = String((new Date()).getFullYear());
   public itemList!: Item[];
   public listToShow = this.itemList;
   public cities: Array<City | ''> = Object.values(City);

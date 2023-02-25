@@ -25,6 +25,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatDialogModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
     ZXingScannerModule,
   ],
   providers: [],

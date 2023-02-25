@@ -4,8 +4,7 @@ import {City, Item} from "../../models/item.model";
 import {User} from "../../models/user.model";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {ActivatedRoute} from "@angular/router";
-import {UNKNOWN_ERROR_CODE} from "@angular/compiler-cli";
-import {Observable} from "rxjs";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -16,9 +15,9 @@ import {Observable} from "rxjs";
 export class AddItemComponent implements OnInit {
 
   private actualUser: User = {
-    firstName: 'Tomi',
-    lastName: 'Vargha',
-    role: 'unknown'
+    firstName: 'Katalin',
+    lastName: 'Nagy',
+    role: 'vezető'
   }
 
   private actualRecord: Item = {
@@ -39,7 +38,10 @@ export class AddItemComponent implements OnInit {
   editMode: boolean = false;
   private id: any;
 
-  constructor(private firestoreService: FirestoreCrudService, private route: ActivatedRoute) {
+  constructor(
+    private firestoreService: FirestoreCrudService,
+    private route: ActivatedRoute,
+    private _snackBar: MatSnackBar) {
 
   }
 
@@ -58,19 +60,20 @@ export class AddItemComponent implements OnInit {
   };
 
   myObserver = {
-    next: (data: Item) => {
-      this.actualRecord = data;
-      this.recordForm.patchValue({
-        customID: this.id,
-        name: data.name,
-        city: data.city,
-        room: data.room,
-        description: data.description,
-      });
+    next: (data: Item | undefined) => {
+      if (data) {
+          this.recordForm.patchValue({
+            customID: data.customID,
+            name: data.name,
+            city: data.city,
+            room: data.room,
+            description: data.description,
+          });
+        } else console.warn("Such item doesn't exists in inventory!");
     },
     error: (err: any) => console.error(err),
     complete: () => console.log('Observer got a complete notification')
-  };
+  }
 
   ngOnInit(): void {
     if (this.route.snapshot.paramMap.get('id')) {
@@ -81,21 +84,31 @@ export class AddItemComponent implements OnInit {
   }
 
   addItem() {
-    this.actualRecord = this.recordForm.value;
+    this.actualRecord = this.recordForm.getRawValue();
     this.actualRecord.createdTime = new Date();
     this.actualRecord.createdBy = this.actualUser;
     this.firestoreService.addItem(this.actualRecord)
-      .then(() => console.log('Successfully added item: ' + this.actualRecord))
+      .then(() => {
+        this._snackBar.open(`Sikeresen hozzáadtad: ${this.actualRecord.name}`, 'Ok',{
+          horizontalPosition: "center",
+          verticalPosition: "top",
+        });
+      })
       .catch((err) => console.error(err));
     this.recordForm.reset();
   }
 
   editItem() {
-    this.actualRecord = this.recordForm.value;
+    this.actualRecord = this.recordForm.getRawValue();
     this.actualRecord.modifiedTime = new Date();
     this.actualRecord.modifiedBy = this.actualUser;
     this.firestoreService.updateItem(this.id, this.actualRecord)
-      .then(() => console.log('succesfully updated ' + this.actualRecord.name))
+      .then(() => {
+        this._snackBar.open(`Sikeresen módosítottad: ${this.actualRecord.name}`, 'Ok',{
+          horizontalPosition: "center",
+          verticalPosition: "top",
+        });
+      })
       .catch((err: any) => console.error(err));
   }
 }
