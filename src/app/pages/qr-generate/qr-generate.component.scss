@@ -2,6 +2,8 @@
 
 .container {
   display: flex;
+  justify-content: center;
+  align-items: start;
   flex-wrap: wrap;
 }
 
@@ -13,6 +15,13 @@
   align-items: center;
 }
 
+.border {
+  border: 1px dotted black;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+}
+
 .filters {
   margin-top: 18px;
   display: flex;
@@ -22,4 +31,8 @@
   .mat-caption {
     margin: 10px;
   }
+}
+
+button {
+  padding-bottom: 1.34375em;
 }

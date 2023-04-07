@@ -11,10 +11,12 @@
 
 <div class="container">
   <div class="items" *ngFor="let item of listToShow">
-    <ngx-kjua
-      [text]="item.customID"
-    ></ngx-kjua>
-    <span>{{item.customID}}</span>
+    <div class="border">
+      <ngx-kjua
+        [text]="item.customID"
+      ></ngx-kjua>
+      <span>{{item.customID}}</span>
+    </div>
     <p class="mat-h2">{{item.name}}</p>
   </div>
 </div>
