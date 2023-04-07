@@ -1,4 +1,9 @@
-<div class="filters">
+<app-scanner *ngIf="showScanner" (scanDone)="scanDone($event)"></app-scanner>
+<button *ngIf="showScanner" class="camera-back" mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="showScanner = false">
+  <mat-icon>keyboard_arrow_left</mat-icon>
+</button>
+<div class="filters" [ngClass]="{hidden: showScanner}">
+  <button class="show-camera-button" mat-stroked-button color="primary" (click)="toggleShowScanner()">Szkennelés</button>
   <mat-form-field appearance="fill">
     <mat-label>Település</mat-label>
     <mat-select (valueChange)="applyFilter(select.value, active)" #select>
@@ -18,7 +23,7 @@
   </div>
 </div>
 
-<table mat-table [dataSource]="listToShow" class="mat-elevation-z8">
+<table [ngClass]="{hidden: showScanner}" mat-table [dataSource]="listToShow" class="mat-elevation-z8">
   <ng-container matColumnDef="customID">
     <th mat-header-cell *matHeaderCellDef> Azonosító </th>
     <td mat-cell *matCellDef="let item" (click)="openDialog(item)"> {{item.customID}} </td>
@@ -63,5 +68,3 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<button class="show-camera-button" mat-stroked-button color="primary" (click)="toggleShowScanner()">Szkennelés</button>
-<app-scanner *ngIf="showScanner" (scanDone)="scanDone($event)"></app-scanner>

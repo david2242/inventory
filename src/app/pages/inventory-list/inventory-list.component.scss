@@ -22,10 +22,13 @@ zxing-scanner {
   margin-top: 18px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   gap: 30px;
   .mat-caption {
     margin: 10px;
+  }
+  .slide {
+    padding-top: 14px;
   }
 }
 
@@ -44,3 +47,14 @@ zxing-scanner {
 .centered {
   text-align: center;
 }
+
+.camera-back {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
