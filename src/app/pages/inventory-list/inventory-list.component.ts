@@ -1,40 +1,49 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {Router} from "@angular/router";
 import {City, Item} from "../../models/item.model";
 import {DialogService} from "../../services/dialog.service";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-inventory-list',
   templateUrl: './inventory-list.component.html',
   styleUrls: ['./inventory-list.component.scss']
 })
-export class InventoryListComponent implements OnInit {
+export class InventoryListComponent implements OnInit, OnDestroy {
 
-  constructor(
-    private firestoreService: FirestoreCrudService,
-    private router: Router,
-    private dialogService: DialogService) {
-      this.cities.unshift('');
-  }
-
+  readonly breakpoint$ = this.breakpointObserver.observe([Breakpoints.XLarge, Breakpoints.Large, Breakpoints.Medium, Breakpoints.Small, Breakpoints.XSmall]);
+  private displayNameMap = new Map([
+    [Breakpoints.XSmall, 'XSmall'],
+    [Breakpoints.Small, 'Small'],
+    [Breakpoints.Medium, 'Medium'],
+    [Breakpoints.Large, 'Large'],
+    [Breakpoints.XLarge, 'XLarge'],
+  ]);
+  private currentScreenSize: string = '';
+  private breakpointSubscription?: Subscription;
   public thisYear = String((new Date()).getFullYear());
   public itemList!: Item[];
   public listToShow = this.itemList;
   public cities: Array<City | ''> = Object.values(City);
-  stockedThisYear(item: Item): boolean {
-    console.log(item.stockTaking);
-    console.log(String((new Date).getFullYear()));
-    if (item.stockTaking){
-      return !!item.stockTaking.filter((date: string) => date.startsWith(String((new Date).getFullYear()))).length;
-    } else return false;
-  }
-
-
-
   public active = true;
   public cityOption?: City;
+  private allColumns: string[] = ['name', 'city', 'room', 'description', 'actions', 'state'];
+  public displayedColumns: string[] = this.allColumns;
+  public showScanner?: boolean;
 
+  constructor(
+    private firestoreService: FirestoreCrudService,
+    private router: Router,
+    private dialogService: DialogService,
+    private breakpointObserver: BreakpointObserver) {
+      this.cities.unshift('');
+  }
+
+  ngOnDestroy(): void {
+       this.breakpointSubscription?.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.firestoreService.readAllItems().subscribe({
@@ -44,10 +53,29 @@ export class InventoryListComponent implements OnInit {
         this.applyFilter(this.cityOption, this.active);
       }
     });
+    this.breakpointSubscription = this.breakpoint$
+      .subscribe(result => {
+
+        for (const query of Object.keys(result.breakpoints)) {
+          if (result.breakpoints[query]) {
+            this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
+          }
+        }
+        this.displayedColumns =  structuredClone(this.allColumns);
+        if (this.currentScreenSize == 'Small') {
+          this.displayedColumns.splice(2, 2);
+        }
+        if (this.currentScreenSize == 'XSmall') {
+          this.displayedColumns.splice(1, 3);
+        }
+      })
   }
 
-  displayedColumns: any = ['name', 'city', 'room', 'description', 'actions', 'state'];
-  showScanner?: boolean;
+  stockedThisYear(item: Item): boolean {
+    if (item.stockTaking){
+      return !!item.stockTaking.filter((date: string) => date.startsWith(String((new Date).getFullYear()))).length;
+    } else return false;
+  }
 
   editItem(id: string) {
     this.router.navigate(['item', id]);

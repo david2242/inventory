@@ -27,8 +27,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {NgxKjuaModule} from 'ngx-kjua';
-import { QrGenerateComponent } from './pages/qr-generate/qr-generate.component';
-
+import {QrGenerateComponent} from './pages/qr-generate/qr-generate.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +62,7 @@ import { QrGenerateComponent } from './pages/qr-generate/qr-generate.component';
     ZXingScannerModule,
     FormsModule,
     MatDialogModule,
-    NgxKjuaModule
+    NgxKjuaModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,9 +5,18 @@
   align-items: center;
 }
 
+h2 {
+  margin: 0;
+  padding: 10px;
+}
+
 form {
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
+  min-width: 300px;
   display: flex;
   justify-content: start;
   flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
 }
