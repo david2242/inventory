@@ -14,6 +14,7 @@ export class QrGenerateComponent implements OnInit {
   public cityOption?: City;
 
   constructor(private firestoreService: FirestoreCrudService) {
+    this.cities.unshift('');
   }
 
   ngOnInit(): void {
