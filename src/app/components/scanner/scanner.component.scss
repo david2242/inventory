@@ -1,7 +1,8 @@
 :host {
-  max-height: calc(100vh - 64px);
-  max-width: 100%;
-  padding-top: 18px;
+  width: 100%
+}
+.camera-select {
+  width: 100%;
 }
 
 span {
@@ -9,4 +10,15 @@ span {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+ngx-scanner-qrcode {
+  width: 100%;
+}
+
+.camera-navs {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 1;
 }

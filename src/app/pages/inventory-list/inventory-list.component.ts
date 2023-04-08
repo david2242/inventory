@@ -12,7 +12,6 @@ import {Subscription} from "rxjs";
   styleUrls: ['./inventory-list.component.scss']
 })
 export class InventoryListComponent implements OnInit, OnDestroy {
-
   readonly breakpoint$ = this.breakpointObserver.observe([Breakpoints.XLarge, Breakpoints.Large, Breakpoints.Medium, Breakpoints.Small, Breakpoints.XSmall]);
   private displayNameMap = new Map([
     [Breakpoints.XSmall, 'XSmall'],

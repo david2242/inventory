@@ -1,56 +1,55 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {Item} from "../../models/item.model";
 import {DialogService} from "../../services/dialog.service";
 import {first, Subscription} from "rxjs";
+import {NgxScannerQrcodeComponent, ScannerQRCodeResult} from "ngx-scanner-qrcode";
+
 
 @Component({
   selector: 'app-scanner',
   templateUrl: './scanner.component.html',
   styleUrls: ['./scanner.component.scss']
 })
-export class ScannerComponent {
-  loading: boolean = true;
+export class ScannerComponent implements AfterViewInit {
+  @Output() exitScan: EventEmitter<string> = new EventEmitter<string>();
   @Output() scanDone = new EventEmitter;
+  @ViewChild('action') scanner!: NgxScannerQrcodeComponent;
+  loading: boolean = true;
   getItemSubscription?: Subscription;
 
-  constructor(private firestoreService: FirestoreCrudService, private dialogService: DialogService) {
+  constructor(
+    private firestoreService: FirestoreCrudService,
+    private dialogService: DialogService
+    ) {
   }
 
-  camerasFound(event: any) {
-    console.log('camerasFound ran! ' + event);
-    this.loading = false;
+  ngAfterViewInit(): void {
+    this.scanner.start();
   }
 
-  camerasNotFound(event: any) {
-    console.log('camerasNotFound run' + event);
-  }
-
-  scanSuccess(event: any) {
+  scanSuccess(id: any) {
     let scannedItem: Item | undefined;
-    this.firestoreService.getItem(event).pipe(first()).subscribe({
+    this.firestoreService.getItem(id).pipe(first()).subscribe({
         next: (data) => {
           scannedItem = data;
           if (scannedItem) {
             this.dialogService.openDialog(scannedItem, true);
-            this.scanDone?.emit(event);
           }
         }
       }
     )
-    console.log('scanSuccess ran! ' + event);
+    console.log('scanSuccess ran! ' + id);
   }
 
-  scanFailure(event: any) {
-    console.log('scanFailure ran! ' + event);
+  onEvent($event: ScannerQRCodeResult[]) {
+    this.scanDone?.emit($event[0].value);
+    this.scanSuccess($event[0].value);
+    this.onClose()
   }
 
-  scanError(event: any) {
-    console.log('scanError ran!' + event);
+  onClose() {
+    this.scanner.stop();
+    this.exitScan.emit();
   }
-
-  scanComplete(event: any) {
-    console.log('scanComplete ran!' + event);
-  }
-
 }
