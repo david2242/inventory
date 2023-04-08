@@ -1,11 +1,20 @@
-<span *ngIf="loading">Kamera betöltése...</span>
-<zxing-scanner
-  (scanSuccess)="scanSuccess($event)"
-  (camerasFound)="camerasFound($event)"
+<span *ngIf="action.isLoading">Kamera betöltése...</span>
+<mat-form-field class="camera-select" appearance="fill">
+  <mat-select [ngModel]="null" (ngModelChange)="action.playDevice($event)" placeholder="Select Camera...">
+    <mat-option [value]="null" selected>Select device</mat-option>
+    <mat-option *ngFor="let c of action.devices.value; let i = index" [value]="c.deviceId" >{{c.label}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<div class="camera-navs">
+  <button mat-fab color="primary" (click)="onClose()">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+</div>
+<ngx-scanner-qrcode
+  #action="scanner"
+  [vibrate]="100"
+  [isBeep]="true"
+  (event)="onEvent($event)"
 >
-<!--  (scanFailure)="scanFailure($event)"-->
-<!--  (camerasNotFound)="camerasNotFound($event)"-->
-<!--  (scanError)="scanError($event)"-->
-<!--  (scanComplete)="scanComplete($event)"-->
-</zxing-scanner>
-<!--  [formats]="formatsEnabled"-->
+</ngx-scanner-qrcode>
+<p *ngIf="action.isLoading">⌛ Loading...</p>
