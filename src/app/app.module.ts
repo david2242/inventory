@@ -18,7 +18,6 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatTableModule} from "@angular/material/table";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {ZXingScannerModule} from "@zxing/ngx-scanner";
 import {ScannerComponent} from "./components/scanner/scanner.component";
 import {ItemCardComponent} from './components/item-card/item-card.component';
 import {MatDialogModule} from "@angular/material/dialog";
@@ -28,6 +27,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {NgxKjuaModule} from 'ngx-kjua';
 import {QrGenerateComponent} from './pages/qr-generate/qr-generate.component';
+import {NgxScannerQrcodeModule} from "ngx-scanner-qrcode";
 
 @NgModule({
   declarations: [
@@ -59,10 +59,10 @@ import {QrGenerateComponent} from './pages/qr-generate/qr-generate.component';
     MatSelectModule,
     MatSlideToggleModule,
     MatSnackBarModule,
-    ZXingScannerModule,
     FormsModule,
     MatDialogModule,
     NgxKjuaModule,
+    NgxScannerQrcodeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
