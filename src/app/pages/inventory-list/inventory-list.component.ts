@@ -88,11 +88,9 @@ export class InventoryListComponent implements OnInit, OnDestroy {
   toggleShowScanner() {
     this.showScanner = !this.showScanner;
   }
-
-  scanDone(itemID: string) {
-    this.markItemScanned(itemID);
-    this.toggleShowScanner();
-  }
+  // scanDone(itemID: string) {
+  //   this.markItemScanned(itemID);
+  // }
 
   openDialog(item: Item) {
     console.log(item);
@@ -109,14 +107,5 @@ export class InventoryListComponent implements OnInit, OnDestroy {
     if (active) {
       this.listToShow = this.listToShow.filter(item => item.active)
     } else this.listToShow = this.listToShow.filter(item => item.active)
-  }
-
-  private markItemScanned(itemID: string) {
-    console.log('I have found this item: ' + itemID);
-    if (this.listToShow.filter((item) => item.customID ==itemID)) {
-      console.log('We have it on the list');
-    } else {
-      console.log("We don't have it");
-    }
   }
 }

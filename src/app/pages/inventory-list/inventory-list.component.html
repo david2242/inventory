@@ -12,13 +12,13 @@
     </mat-select>
   </mat-form-field>
   <div class="slide">
-    <span class="mat-caption" [ngClass]="{'show-scrapped': active}">Selejtezett</span>
     <mat-slide-toggle
       (change)="applyFilter(select.value, active)"
       [(ngModel)]=active
       class="example-margin">
     </mat-slide-toggle>
-    <span class="mat-caption" [ngClass]="{'show-scrapped': !active}">Aktív</span>
+    <span class="mat-caption" *ngIf="!active">Selejtezett</span>
+    <span class="mat-caption" *ngIf="active">Aktív</span>
   </div>
 </div>
 
