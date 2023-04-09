@@ -28,13 +28,7 @@ export class FirestoreCrudService {
   }
 
   readAllItems(): Observable<Item[]> {
-    return this.firestore.collection('inventory').get().pipe(
-      map((items) => items.docs.map((item) => {
-        const convertedItem: any = item.data(); // TODO: Any is here
-        convertedItem.customID = item.id;
-        return convertedItem;
-      }))
-    )
+    return this.firestore.collection<Item>('inventory').valueChanges();
   }
 
   getItem(id: string): Observable<Item | undefined> {
