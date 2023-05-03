@@ -20,7 +20,7 @@ export class InventoryListComponent implements OnInit, OnDestroy {
     [Breakpoints.Large, 'Large'],
     [Breakpoints.XLarge, 'XLarge'],
   ]);
-  private currentScreenSize: string = '';
+  private currentScreenSize = '';
   private breakpointSubscription?: Subscription;
   public thisYear = String((new Date()).getFullYear());
   public itemList!: Item[];

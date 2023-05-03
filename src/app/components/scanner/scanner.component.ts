@@ -15,7 +15,7 @@ export class ScannerComponent implements AfterViewInit {
   @Output() exitScan: EventEmitter<string> = new EventEmitter<string>();
   @Output() scanDone = new EventEmitter;
   @ViewChild('action') scanner!: NgxScannerQrcodeComponent;
-  loading: boolean = true;
+  loading = true;
   getItemSubscription?: Subscription;
 
   constructor(
