@@ -31,7 +31,7 @@ export class QrGenerateComponent implements OnInit {
     if (!city && this.itemList) {
       this.listToShow = this.itemList;
     } else {
-      this.listToShow = this.itemList!.filter(item => item.city == city && item.active);
+      this.listToShow = this.itemList?.filter(item => item.city == city && item.active);
     }
   }
 
