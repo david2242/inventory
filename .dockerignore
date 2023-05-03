@@ -1,0 +1,7 @@
+.angular
+.firebase
+.idea
+.vscode
+ci
+dist
+node_modules
