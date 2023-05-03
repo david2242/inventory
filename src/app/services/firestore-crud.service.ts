@@ -62,7 +62,7 @@ export class FirestoreCrudService {
         } else {
           leltarAdat = [date];
         }
-        return this.itemDoc!.update({'stockTaking': leltarAdat})
+        return this.itemDoc?.update({'stockTaking': leltarAdat})
       }
     })
   }
