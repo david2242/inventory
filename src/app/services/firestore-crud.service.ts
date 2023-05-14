@@ -5,8 +5,8 @@ import {
   AngularFirestoreDocument,
   DocumentReference
 } from "@angular/fire/compat/firestore";
-import {Item} from "../models/item.model";
-import {first, map, Observable} from "rxjs";
+import { Item } from "../models/item.model";
+import { map, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -47,23 +47,8 @@ export class FirestoreCrudService {
     return this.itemDoc.update(data);
   }
 
-  updateStocking(id: string, date: string) {
+  updateStocking(id: string, stockTaking: string[]) {
     this.itemDoc = this.firestore.doc<Item>('inventory/' + id);
-    let leltarAdat: any[] = [];
-    this.getItem(id).pipe(first()).subscribe({
-      next: (item) => {
-        if (item?.stockTaking) {
-          leltarAdat = item.stockTaking
-        }
-        if (leltarAdat) {
-          if (!leltarAdat.includes(date)) {
-            leltarAdat.push(date);
-          }
-        } else {
-          leltarAdat = [date];
-        }
-        return this.itemDoc?.update({'stockTaking': leltarAdat})
-      }
-    })
+    return this.itemDoc?.update({'stockTaking': stockTaking})
   }
 }

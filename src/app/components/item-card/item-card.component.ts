@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Item} from "../../models/item.model";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-item-card',
@@ -13,7 +13,8 @@ export class ItemCardComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ItemCardComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private firestore: FirestoreCrudService
+    private firestore: FirestoreCrudService,
+    private matSnackBar: MatSnackBar
   ) {}
 
   onNoClick(): void {
@@ -26,8 +27,9 @@ export class ItemCardComponent implements OnInit {
   }
 
   pushToStocked() {
-    let currentDate = (new Date()).toLocaleDateString('hu');
-    this.firestore.updateStocking(this.data.item.customID, currentDate);
-      // .then(() => console.log('pushed to stock'));
+    const currentDate = (new Date()).toLocaleDateString('hu');
+    this.data.item.stockTaking ? this.data.item.stockTaking.push(currentDate) : this.data.item.stockTaking = [currentDate]
+    this.firestore.updateStocking(this.data.item.customID, this.data.item.stockTaking)
+      .then(() => this.matSnackBar.open('Leltározva!', currentDate));
   }
 }
