@@ -35,7 +35,7 @@ export class AddItemComponent implements OnInit {
     active: true
   }
 
-  editMode: boolean = false;
+  editMode = false;
   private id: any;
 
   constructor(
@@ -45,7 +45,6 @@ export class AddItemComponent implements OnInit {
 
   }
 
-  //TODO: Ez mi a szar
   public recordForm = new FormGroup({
     customID: new FormControl<string | undefined>(undefined, {nonNullable: true}),
     name: new FormControl<string>('', {nonNullable: true}),
@@ -53,7 +52,7 @@ export class AddItemComponent implements OnInit {
     room: new FormControl<string>('', {nonNullable: true}),
     description: new FormControl<string>('', {nonNullable: true}),
     active: new FormControl<boolean>(true, {nonNullable: true}),
-  }) //TODO: Validator
+  })
 
   getItem() {
       this.firestoreService.getItem(this.id).subscribe((data: any) => console.log(data));

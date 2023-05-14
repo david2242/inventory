@@ -3,7 +3,6 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
   AngularFirestoreDocument,
-  DocumentReference
 } from "@angular/fire/compat/firestore";
 import { Item } from "../models/item.model";
 import { map, Observable} from "rxjs";
@@ -18,8 +17,12 @@ export class FirestoreCrudService {
   private itemDoc?: AngularFirestoreDocument<Item>;
   private inventoryCollection: AngularFirestoreCollection<Item> = this.firestore.collection<Item>('inventory');
 
-  addItem(item: Item): Promise<DocumentReference<Item>> {
-    return this.inventoryCollection.add(item);
+  addItem(item: Item): Promise<void> {
+    const customID: string = this.firestore.createId();
+    return this.inventoryCollection.doc(customID).set({
+      ...item,
+      "customID": customID
+    });
   }
 
   deleteItem(id: string): Promise<void> {
@@ -35,9 +38,7 @@ export class FirestoreCrudService {
     this.itemDoc = this.firestore.doc<Item>('inventory/' + id);
     return this.itemDoc.get().pipe(
       map((item) => {
-        const convertedItem: any = item.data();
-        convertedItem.customID= item.id;
-        return convertedItem;
+        return item.data();
       })
     )
   }
