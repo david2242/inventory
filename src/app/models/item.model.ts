@@ -7,8 +7,8 @@ export interface Item {
   city: City,
   room: string,
   description: string,
-  createdTime?: any,
-  modifiedTime?: any,
+  createdTime?: string,
+  modifiedTime?: string,
   createdBy?: User,
   modifiedBy?: User,
   stockTaking?: string[]

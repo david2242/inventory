@@ -26,7 +26,7 @@ export class AddItemComponent implements OnInit {
     city: City.CECE,
     room: '',
     description: '',
-    createdTime: new Date(), //TODO valamiért csak nanosec és sec mezők mentődnek el - mert ez nem date hanem Timestamp
+    createdTime: '',
     createdBy: {
       firstName: '',
       lastName: '',
@@ -84,7 +84,7 @@ export class AddItemComponent implements OnInit {
 
   addItem() {
     this.actualRecord = this.recordForm.getRawValue();
-    this.actualRecord.createdTime = new Date();
+    this.actualRecord.createdTime = new Date().toLocaleString();
     this.actualRecord.createdBy = this.actualUser;
     this.firestoreService.addItem(this.actualRecord)
       .then(() => {
@@ -99,7 +99,7 @@ export class AddItemComponent implements OnInit {
 
   editItem() {
     this.actualRecord = this.recordForm.getRawValue();
-    this.actualRecord.modifiedTime = new Date();
+    this.actualRecord.modifiedTime = new Date().toLocaleString();
     this.actualRecord.modifiedBy = this.actualUser;
     this.firestoreService.updateItem(this.id, this.actualRecord)
       .then(() => {
