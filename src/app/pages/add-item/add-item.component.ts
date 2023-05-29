@@ -26,7 +26,7 @@ export class AddItemComponent implements OnInit {
     city: City.CECE,
     room: '',
     description: '',
-    createdTime: new Date(), //TODO valamiért csak nanosec és sec mezők mentődnek el - mert ez nem date hanem Timestamp
+    createdTime: '',
     createdBy: {
       firstName: '',
       lastName: '',
@@ -35,8 +35,8 @@ export class AddItemComponent implements OnInit {
     active: true
   }
 
-  editMode: boolean = false;
-  private id: any;
+  editMode = false;
+  private id: string | null = null;
 
   constructor(
     private firestoreService: FirestoreCrudService,
@@ -45,7 +45,6 @@ export class AddItemComponent implements OnInit {
 
   }
 
-  //TODO: Ez mi a szar
   public recordForm = new FormGroup({
     customID: new FormControl<string | undefined>(undefined, {nonNullable: true}),
     name: new FormControl<string>('', {nonNullable: true}),
@@ -53,7 +52,7 @@ export class AddItemComponent implements OnInit {
     room: new FormControl<string>('', {nonNullable: true}),
     description: new FormControl<string>('', {nonNullable: true}),
     active: new FormControl<boolean>(true, {nonNullable: true}),
-  }) //TODO: Validator
+  })
 
   getItem() {
       this.firestoreService.getItem(this.id).subscribe((data: any) => console.log(data));
@@ -71,13 +70,13 @@ export class AddItemComponent implements OnInit {
           });
         } else console.warn("Such item doesn't exists in inventory!");
     },
-    error: (err: any) => console.error(err),
+    error: (err: Error) => console.error(err),
     complete: () => console.log('Observer got a complete notification')
   }
 
   ngOnInit(): void {
-    if (this.route.snapshot.paramMap.get('id')) {
-      this.id = this.route.snapshot.paramMap.get('id');
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id) {
       this.editMode = true;
       this.firestoreService.getItem(this.id).subscribe(this.myObserver)
     }
@@ -85,7 +84,7 @@ export class AddItemComponent implements OnInit {
 
   addItem() {
     this.actualRecord = this.recordForm.getRawValue();
-    this.actualRecord.createdTime = new Date();
+    this.actualRecord.createdTime = new Date().toLocaleString();
     this.actualRecord.createdBy = this.actualUser;
     this.firestoreService.addItem(this.actualRecord)
       .then(() => {
@@ -99,8 +98,11 @@ export class AddItemComponent implements OnInit {
   }
 
   editItem() {
+    if (!this.editMode || !this.id) {
+      return;
+    }
     this.actualRecord = this.recordForm.getRawValue();
-    this.actualRecord.modifiedTime = new Date();
+    this.actualRecord.modifiedTime = new Date().toLocaleString();
     this.actualRecord.modifiedBy = this.actualUser;
     this.firestoreService.updateItem(this.id, this.actualRecord)
       .then(() => {
@@ -109,6 +111,6 @@ export class AddItemComponent implements OnInit {
           verticalPosition: "top",
         });
       })
-      .catch((err: any) => console.error(err));
+      .catch((err) => console.error(err));
   }
 }

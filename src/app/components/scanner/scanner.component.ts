@@ -28,7 +28,7 @@ export class ScannerComponent implements AfterViewInit {
     this.scanner.start();
   }
 
-  scanSuccess(id: any) {
+  scanSuccess(id: string) {
     let scannedItem: Item | undefined;
     this.firestoreService.getItem(id).pipe(first()).subscribe({
         next: (data) => {
