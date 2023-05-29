@@ -36,7 +36,7 @@ export class AddItemComponent implements OnInit {
   }
 
   editMode = false;
-  private id: any;
+  private id: string | null = null;
 
   constructor(
     private firestoreService: FirestoreCrudService,
@@ -70,13 +70,13 @@ export class AddItemComponent implements OnInit {
           });
         } else console.warn("Such item doesn't exists in inventory!");
     },
-    error: (err: any) => console.error(err),
+    error: (err: Error) => console.error(err),
     complete: () => console.log('Observer got a complete notification')
   }
 
   ngOnInit(): void {
-    if (this.route.snapshot.paramMap.get('id')) {
-      this.id = this.route.snapshot.paramMap.get('id');
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id) {
       this.editMode = true;
       this.firestoreService.getItem(this.id).subscribe(this.myObserver)
     }
@@ -98,6 +98,9 @@ export class AddItemComponent implements OnInit {
   }
 
   editItem() {
+    if (!this.editMode || !this.id) {
+      return;
+    }
     this.actualRecord = this.recordForm.getRawValue();
     this.actualRecord.modifiedTime = new Date().toLocaleString();
     this.actualRecord.modifiedBy = this.actualUser;
@@ -108,6 +111,6 @@ export class AddItemComponent implements OnInit {
           verticalPosition: "top",
         });
       })
-      .catch((err: any) => console.error(err));
+      .catch((err) => console.error(err));
   }
 }
