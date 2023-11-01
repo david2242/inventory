@@ -26,7 +26,7 @@ export class AddItemComponent implements OnInit {
     city: City.CECE,
     room: '',
     description: '',
-    createdTime: '',
+    createdTime: 0,
     createdBy: {
       firstName: '',
       lastName: '',
@@ -80,7 +80,7 @@ export class AddItemComponent implements OnInit {
 
   addItem() {
     this.actualRecord = this.recordForm.getRawValue();
-    this.actualRecord.createdTime = new Date().toLocaleString();
+    this.actualRecord.createdTime = Date.now();
     this.actualRecord.createdBy = this.actualUser;
     this.firestoreService.addItem(this.actualRecord)
       .then(() => {
@@ -98,7 +98,7 @@ export class AddItemComponent implements OnInit {
       return;
     }
     this.actualRecord = this.recordForm.getRawValue();
-    this.actualRecord.modifiedTime = new Date().toLocaleString();
+    this.actualRecord.modifiedTime = Date.now();
     this.actualRecord.modifiedBy = this.actualUser;
     this.firestoreService.updateItem(this.id, this.actualRecord)
       .then(() => {

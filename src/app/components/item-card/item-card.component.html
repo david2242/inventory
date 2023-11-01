@@ -15,7 +15,7 @@
     </tr>
     <tr>
       <td>Létrehozás ideje: </td>
-      <td *ngIf="data.item.createdTime">{{data.item.createdTime}}</td>
+      <td *ngIf="data.item.createdTime">{{data.item.createdTime | date:"yyyy. MM. dd."}}</td>
     </tr>
     <tr>
       <td>Utoljára módosította: </td>
@@ -24,7 +24,7 @@
     </tr>
     <tr>
       <td>Módosítás ideje: </td>
-      <td *ngIf="data.item.modifiedTime">{{data.item.modifiedTime}}</td>
+      <td *ngIf="data.item.modifiedTime">{{data.item.modifiedTime | date:"yyyy. MM. dd."}}</td>
       <td *ngIf="!data.item.modifiedTime">-</td>
     </tr>
   </table>
