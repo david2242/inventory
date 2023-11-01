@@ -11,20 +11,20 @@
     </tr>
     <tr>
       <td>Létrehozta: </td>
-      <td>{{data.item.createdBy.firstName}}</td>
+      <td *ngIf="data.item.createdBy && data.item.createdBy.firstName">{{data.item.createdBy.firstName}}</td>
     </tr>
     <tr>
       <td>Létrehozás ideje: </td>
-      <td>{{data.item.createdTime.toDate().toLocaleString()}}</td>
+      <td *ngIf="data.item.createdTime">{{data.item.createdTime}}</td>
     </tr>
     <tr>
       <td>Utoljára módosította: </td>
-      <td *ngIf="data.item.modifiedBy">{{data.item.modifiedBy.firstName}}</td>
+      <td *ngIf="data.item.modifiedBy && data.item.modifiedBy.firstName">{{data.item.modifiedBy.firstName}}</td>
       <td *ngIf="!data.item.modifiedBy">-</td>
     </tr>
     <tr>
       <td>Módosítás ideje: </td>
-      <td *ngIf="data.item.modifiedTime">{{data.item.modifiedTime!.toDate().toLocaleString()}}</td>
+      <td *ngIf="data.item.modifiedTime">{{data.item.modifiedTime}}</td>
       <td *ngIf="!data.item.modifiedTime">-</td>
     </tr>
   </table>

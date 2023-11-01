@@ -4,7 +4,7 @@ import {City, Item} from "../../models/item.model";
 import {User} from "../../models/user.model";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {ActivatedRoute} from "@angular/router";
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -53,10 +53,6 @@ export class AddItemComponent implements OnInit {
     description: new FormControl<string>('', {nonNullable: true}),
     active: new FormControl<boolean>(true, {nonNullable: true}),
   })
-
-  getItem() {
-      this.firestoreService.getItem(this.id).subscribe((data: any) => console.log(data));
-  };
 
   myObserver = {
     next: (data: Item | undefined) => {

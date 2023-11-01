@@ -14,6 +14,11 @@ export interface Item {
   stockTaking?: string[]
 }
 
+export interface DialogDataItem {
+  item: Item,
+  scanned: boolean
+}
+
 export enum City {
   ALAP = 'Alap',
   ALSOSZENTIVAN = 'Alsószentiván',
