@@ -88,9 +88,6 @@ export class InventoryListComponent implements OnInit, OnDestroy {
   toggleShowScanner() {
     this.showScanner = !this.showScanner;
   }
-  // scanDone(itemID: string) {
-  //   this.markItemScanned(itemID);
-  // }
 
   openDialog(item: Item) {
     console.log(item);
@@ -103,9 +100,6 @@ export class InventoryListComponent implements OnInit, OnDestroy {
     } else {
       this.listToShow = this.itemList.filter(item => item.city == city);
     }
-
-    if (active) {
-      this.listToShow = this.listToShow.filter(item => item.active)
-    } else this.listToShow = this.listToShow.filter(item => item.active)
+    this.listToShow = this.listToShow.filter(item => item.active === active);
   }
 }
