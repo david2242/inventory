@@ -72,7 +72,7 @@ export class InventoryListComponent implements OnInit, OnDestroy {
 
   stockedThisYear(item: Item): boolean {
     if (item.stockTaking){
-      return !!item.stockTaking.filter((date: string) => date.startsWith(String((new Date).getFullYear()))).length;
+      return !!item.stockTaking.filter((date: number) => (new Date()).getFullYear() == (new Date(date)).getFullYear()).length;
     } else return false;
   }
 

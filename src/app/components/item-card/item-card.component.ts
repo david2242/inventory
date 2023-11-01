@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -9,7 +9,7 @@ import {DialogDataItem} from "../../models/item.model";
   templateUrl: './item-card.component.html',
   styleUrls: ['./item-card.component.scss']
 })
-export class ItemCardComponent implements OnInit {
+export class ItemCardComponent {
 
   constructor(
     public dialogRef: MatDialogRef<ItemCardComponent>,
@@ -22,18 +22,13 @@ export class ItemCardComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  ngOnInit() {
-    console.log(this.data);
-    //TODO: why open 2x
-  }
-
   pushToStocked() {
     if (!this.data.item.customID) {
       return;
     }
-    const currentDate = (new Date()).toLocaleDateString('hu');
+    const currentDate = Date.now();
     this.data.item.stockTaking ? this.data.item.stockTaking.push(currentDate) : this.data.item.stockTaking = [currentDate]
     this.firestore.updateStocking(this.data.item.customID, this.data.item.stockTaking)
-      .then(() => this.matSnackBar.open('Leltározva!', currentDate));
+      .then(() => this.matSnackBar.open('Leltározva!', (new Date(currentDate)).toLocaleString()));
   }
 }

@@ -7,11 +7,11 @@ export interface Item {
   city: City,
   room: string,
   description: string,
-  createdTime?: string,
-  modifiedTime?: string,
+  createdTime?: number,
+  modifiedTime?: number,
   createdBy?: User,
   modifiedBy?: User,
-  stockTaking?: string[]
+  stockTaking?: number[],
 }
 
 export interface DialogDataItem {

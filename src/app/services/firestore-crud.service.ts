@@ -48,7 +48,7 @@ export class FirestoreCrudService {
     return this.itemDoc.update(data);
   }
 
-  updateStocking(id: string, stockTaking: string[]) {
+  updateStocking(id: string, stockTaking: number[]) {
     this.itemDoc = this.firestore.doc<Item>('inventory/' + id);
     return this.itemDoc?.update({'stockTaking': stockTaking})
   }
