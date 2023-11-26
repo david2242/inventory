@@ -63,3 +63,20 @@ zxing-scanner {
   display: none;
 }
 
+table {
+  border-spacing: 2px;
+  margin-top: inherit;
+}
+
+th {
+  text-align: left;
+}
+
+.mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-accordion {
+  width: 100%;
+}

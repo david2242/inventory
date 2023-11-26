@@ -22,7 +22,48 @@
   </div>
 </div>
 
-<table [ngClass]="{hidden: showScanner}" mat-table [dataSource]="listToShow" class="mat-elevation-z8">
+<mat-accordion *ngIf="currentScreenSize !== 'Medium'" class="example-headers-align" multi displayMode="flat">
+  <mat-expansion-panel (click)="accordion.closeAll()" hideToggle disabled>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Név
+      </mat-panel-title>
+      <mat-panel-description>
+        <span>Helység</span>
+        <span>Leltározva</span>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+  <mat-expansion-panel *ngFor="let item of listToShow" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{item.name}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{item.room}}
+        <mat-checkbox
+          *ngIf="item.active"
+          [checked]="stockedThisYear(item)"
+          (click)="$event.preventDefault()"
+        ></mat-checkbox>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="expansion-panel-body">
+      <table>
+        <tr><th>Rögzítette: </th><td>{{getFullName(item.createdBy)}}</td></tr>
+        <tr><th>Rögzítés ideje: </th><td>{{item.createdTime | date :'mediumDate' }}</td></tr>
+        <tr *ngIf="item.modifiedTime"><th>Módosította: </th><td>{{getFullName(item.modifiedBy)}}</td></tr>
+        <tr *ngIf="item.modifiedTime"><th>Módosítás ideje</th><td>{{item.modifiedTime}}</td></tr>
+        <tr><th>Város: </th><td>{{item.city}}</td></tr>
+        <tr><th>Helység: </th><td>{{item.room}}</td></tr>
+        <tr><th>Leírás: </th><td>{{item.description}}</td></tr>
+        <tr *ngIf="item.stockTaking"><th>Leltározva: </th><td>{{((item.stockTaking ? item.stockTaking[item.stockTaking.length - 1] : '') | date : 'mediumDate') || '-'}}</td></tr>
+      </table>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<table *ngIf="currentScreenSize === 'Medium'" [ngClass]="{hidden: showScanner}" mat-table [dataSource]="listToShow" class="mat-elevation-z8">
   <ng-container matColumnDef="customID">
     <th mat-header-cell *matHeaderCellDef> Azonosító </th>
     <td mat-cell *matCellDef="let item" (click)="openDialog(item)"> {{item.customID}} </td>

@@ -1,10 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {Router} from "@angular/router";
 import {City, Item} from "../../models/item.model";
 import {DialogService} from "../../services/dialog.service";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {Subscription} from "rxjs";
+import {User} from "../../models/user.model";
+import {MatAccordion} from "@angular/material/expansion";
 
 @Component({
   selector: 'app-inventory-list',
@@ -12,15 +14,14 @@ import {Subscription} from "rxjs";
   styleUrls: ['./inventory-list.component.scss']
 })
 export class InventoryListComponent implements OnInit, OnDestroy {
-  readonly breakpoint$ = this.breakpointObserver.observe([Breakpoints.XLarge, Breakpoints.Large, Breakpoints.Medium, Breakpoints.Small, Breakpoints.XSmall]);
+  @ViewChild(MatAccordion) accordion!: MatAccordion;
+  readonly breakpoint$ = this.breakpointObserver.observe([Breakpoints.Medium, Breakpoints.Small, Breakpoints.XSmall]);
   private displayNameMap = new Map([
     [Breakpoints.XSmall, 'XSmall'],
     [Breakpoints.Small, 'Small'],
     [Breakpoints.Medium, 'Medium'],
-    [Breakpoints.Large, 'Large'],
-    [Breakpoints.XLarge, 'XLarge'],
   ]);
-  private currentScreenSize = '';
+  public currentScreenSize = '';
   private breakpointSubscription?: Subscription;
   public thisYear = String((new Date()).getFullYear());
   public itemList!: Item[];
@@ -81,7 +82,6 @@ export class InventoryListComponent implements OnInit, OnDestroy {
   }
 
   deleteItem(id: string) {
-    console.log('delete item: ' + id)
     this.firestoreService.deleteItem(id);
   }
 
@@ -90,7 +90,6 @@ export class InventoryListComponent implements OnInit, OnDestroy {
   }
 
   openDialog(item: Item) {
-    console.log(item);
     this.dialogService.openDialog(item, false);
   }
 
@@ -101,5 +100,9 @@ export class InventoryListComponent implements OnInit, OnDestroy {
       this.listToShow = this.itemList.filter(item => item.city == city);
     }
     this.listToShow = this.listToShow.filter(item => item.active === active);
+  }
+
+  getFullName(user?: User) {
+    return user?.lastName.concat(' ', user.firstName);
   }
 }
