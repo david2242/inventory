@@ -11,6 +11,7 @@ table {
 
 button {
   margin-right: 5px;
+  margin-bottom: 22px;
 }
 
 zxing-scanner {
@@ -28,11 +29,19 @@ zxing-scanner {
     margin: 10px;
   }
   .slide {
-    padding-top: 27px;
     display: flex;
     justify-content: center;
+    margin-bottom: 22px;
+    mat-slide-toggle {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      height: 56px;
+    }
     span {
-      display: block;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
       width: 56px;
       margin: 0;
       padding: 4px 8px;
@@ -47,10 +56,6 @@ zxing-scanner {
   visibility: hidden;
 }
 
-.show-camera-button {
-  margin: 10px;
-}
-
 .my-padding {
   padding: 0 5px;
 }
@@ -63,3 +68,20 @@ zxing-scanner {
   display: none;
 }
 
+table {
+  border-spacing: 2px;
+  margin-top: inherit;
+}
+
+th {
+  text-align: left;
+}
+
+.mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-accordion {
+  width: 100%;
+}

@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -21,6 +21,7 @@ import {MatInputModule} from '@angular/material/input';
 import {ScannerComponent} from "./components/scanner/scanner.component";
 import {ItemCardComponent} from './components/item-card/item-card.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatExpansionModule} from "@angular/material/expansion";
 import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -52,6 +53,7 @@ import {NgxScannerQrcodeModule} from "ngx-scanner-qrcode";
     MatIconModule,
     MatButtonModule,
     MatTableModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
@@ -64,7 +66,12 @@ import {NgxScannerQrcodeModule} from "ngx-scanner-qrcode";
     NgxKjuaModule,
     NgxScannerQrcodeModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'hu-HU'
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
