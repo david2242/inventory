@@ -24,6 +24,7 @@
     "@angular/platform-browser": "^16.1.8",
     "@angular/platform-browser-dynamic": "^16.1.8",
     "@angular/router": "^16.1.8",
+    "@auth0/auth0-angular": "^2.2.1",
     "kjua-svg": "^1.13.1",
     "ngx-kjua": "^2.0.4",
     "ngx-scanner-qrcode": "^1.4.2",

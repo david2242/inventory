@@ -29,6 +29,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {NgxKjuaModule} from 'ngx-kjua';
 import {QrGenerateComponent} from './pages/qr-generate/qr-generate.component';
 import {NgxScannerQrcodeModule} from "ngx-scanner-qrcode";
+import {AuthModule} from "@auth0/auth0-angular";
 
 @NgModule({
   declarations: [
@@ -64,7 +65,14 @@ import {NgxScannerQrcodeModule} from "ngx-scanner-qrcode";
     FormsModule,
     MatDialogModule,
     NgxKjuaModule,
-    NgxScannerQrcodeModule
+    NgxScannerQrcodeModule,
+    AuthModule.forRoot({
+      domain: 'dev-ufrbpiya3sx3an5i.us.auth0.com',
+      clientId: 'xCwzgZSB0ZMGmEG0nfah9Aa2X4Y2wdBo',
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      }
+    })
   ],
   providers: [
     {
