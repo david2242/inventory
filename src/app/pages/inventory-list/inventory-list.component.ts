@@ -31,7 +31,7 @@ export class InventoryListComponent implements OnInit, OnDestroy {
   public cityOption?: City;
   private allColumns: string[] = ['name', 'city', 'room', 'description', 'actions', 'state'];
   public displayedColumns: string[] = this.allColumns;
-  public showScanner?: boolean;
+  public showScanner = false;
 
   constructor(
     private firestoreService: FirestoreCrudService,
@@ -100,9 +100,5 @@ export class InventoryListComponent implements OnInit, OnDestroy {
       this.listToShow = this.itemList.filter(item => item.city == city);
     }
     this.listToShow = this.listToShow.filter(item => item.active === active);
-  }
-
-  getFullName(user?: User) {
-    return user?.lastName.concat(' ', user.firstName);
   }
 }

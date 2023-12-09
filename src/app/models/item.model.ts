@@ -9,8 +9,8 @@ export interface Item {
   description: string,
   createdTime?: number,
   modifiedTime?: number,
-  createdBy?: User,
-  modifiedBy?: User,
+  createdBy?: string,
+  modifiedBy?: string,
   stockTaking?: number[],
 }
 

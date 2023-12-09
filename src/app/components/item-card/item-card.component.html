@@ -11,7 +11,7 @@
     </tr>
     <tr>
       <td>Létrehozta: </td>
-      <td *ngIf="data.item.createdBy && data.item.createdBy.firstName">{{data.item.createdBy.firstName}}</td>
+      <td *ngIf="data.item.createdBy">{{data.item.createdBy}}</td>
     </tr>
     <tr>
       <td>Létrehozás ideje: </td>
@@ -19,7 +19,7 @@
     </tr>
     <tr>
       <td>Utoljára módosította: </td>
-      <td *ngIf="data.item.modifiedBy && data.item.modifiedBy.firstName">{{data.item.modifiedBy.firstName}}</td>
+      <td *ngIf="data.item.modifiedBy">{{data.item.modifiedBy}}</td>
       <td *ngIf="!data.item.modifiedBy">-</td>
     </tr>
     <tr>
