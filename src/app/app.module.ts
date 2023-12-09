@@ -49,12 +49,7 @@ import {QrGenerateComponent} from './pages/qr-generate/qr-generate.component';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AppRoutingModule,
-    AuthModule.forRoot({
-      domain: 'dev-ufrbpiya3sx3an5i.us.auth0.com',
-      clientId: 'xCwzgZSB0ZMGmEG0nfah9Aa2X4Y2wdBo',
-      authorizationParams: {
-        redirect_uri: 'http://localhost:4200'
-      }}),
+    AuthModule.forRoot(environment.authModule),
     BrowserAnimationsModule,
     BrowserModule,
     FormsModule,

@@ -12,8 +12,17 @@ export const environment = {
     authDomain: 'halo-60249.firebaseapp.com',
     messagingSenderId: '124850108802',
   },
+  authModule: {
+    domain: 'dev-ufrbpiya3sx3an5i.us.auth0.com',
+    clientId: 'xCwzgZSB0ZMGmEG0nfah9Aa2X4Y2wdBo',
+    authorizationParams: {
+      redirect_uri: 'http://localhost:4200'
+    }
+  },
   production: false
 };
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file
