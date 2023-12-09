@@ -1,0 +1,20 @@
+<mat-toolbar>
+    <span>Leltár</span>
+  <ng-container *ngIf="user.loggedIn$ | async">
+    <span class="example-spacer"></span>
+    <button routerLink="/list" mat-raised-button color="primary">Lista</button>
+    <span class="example-spacer"></span>
+    <button routerLink="/addItem" mat-raised-button color="primary">Rögzítés</button>
+    <span class="example-spacer"></span>
+    <button routerLink="/qrgenerate" mat-raised-button color="primary">Qr generálás</button>
+  </ng-container>
+  <span class="example-spacer"></span>
+  <ng-container *ngIf="(auth.isAuthenticated$ | async) === false">
+    <button mat-raised-button color="primary" (click)="login()">Bejelentkezés</button>
+    <span class="example-spacer"></span>
+  </ng-container>
+  <ng-container *ngIf="auth.isAuthenticated$ | async">
+    <button mat-raised-button color="primary" (click)="logout()">Kijelentkezés</button>
+    <span class="example-spacer"></span>
+  </ng-container>
+</mat-toolbar>

@@ -1,78 +1,79 @@
 import {LOCALE_ID, NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import {environment} from '../environments/environment';
 
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {AddItemComponent} from './pages/add-item/add-item.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {InventoryListComponent} from './pages/inventory-list/inventory-list.component';
-import {HttpClientModule} from "@angular/common/http";
-import {environment} from '../environments/environment.prod';
 import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+import {AppRoutingModule} from './app-routing.module';
+import {AuthModule} from '@auth0/auth0-angular';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from "@angular/material/button";
-import {MatTableModule} from "@angular/material/table";
+import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {ScannerComponent} from "./components/scanner/scanner.component";
-import {ItemCardComponent} from './components/item-card/item-card.component';
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatExpansionModule} from "@angular/material/expansion";
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {NgxKjuaModule} from 'ngx-kjua';
+import {NgxScannerQrcodeModule} from 'ngx-scanner-qrcode';
+
+import {AppComponent} from './app.component';
+import {AddItemComponent} from './pages/add-item/add-item.component';
+import {InventoryListComponent} from './pages/inventory-list/inventory-list.component';
+import {ItemCardComponent} from './components/item-card/item-card.component';
+import {NavbarComponent} from './components/navbar/navbar.component';
+import {ScannerComponent} from './components/scanner/scanner.component';
 import {QrGenerateComponent} from './pages/qr-generate/qr-generate.component';
-import {NgxScannerQrcodeModule} from "ngx-scanner-qrcode";
-import {AuthModule} from "@auth0/auth0-angular";
 
 @NgModule({
   declarations: [
     AppComponent,
     AddItemComponent,
     InventoryListComponent,
-    ScannerComponent,
     ItemCardComponent,
+    NavbarComponent,
+    ScannerComponent,
     QrGenerateComponent
   ],
   imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTableModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    FormsModule,
-    MatDialogModule,
-    NgxKjuaModule,
-    NgxScannerQrcodeModule,
+    AppRoutingModule,
     AuthModule.forRoot({
       domain: 'dev-ufrbpiya3sx3an5i.us.auth0.com',
       clientId: 'xCwzgZSB0ZMGmEG0nfah9Aa2X4Y2wdBo',
       authorizationParams: {
-        redirect_uri: window.location.origin
-      }
-    })
+        redirect_uri: 'http://localhost:4200'
+      }}),
+    BrowserAnimationsModule,
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatTableModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    NgxKjuaModule,
+    NgxScannerQrcodeModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
