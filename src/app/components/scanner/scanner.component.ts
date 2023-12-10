@@ -3,13 +3,22 @@ import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {Item} from "../../models/item.model";
 import {DialogService} from "../../services/dialog.service";
 import {first, Subscription} from "rxjs";
-import {NgxScannerQrcodeComponent, ScannerQRCodeResult} from "ngx-scanner-qrcode";
+import { NgxScannerQrcodeComponent, ScannerQRCodeResult, NgxScannerQrcodeModule } from "ngx-scanner-qrcode";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
+import { MatOptionModule } from "@angular/material/core";
+import { FormsModule } from "@angular/forms";
+import { MatSelectModule } from "@angular/material/select";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { NgIf, NgFor } from "@angular/common";
 
 
 @Component({
-  selector: "app-scanner",
-  templateUrl: "./scanner.component.html",
-  styleUrls: ["./scanner.component.scss"]
+    selector: "app-scanner",
+    templateUrl: "./scanner.component.html",
+    styleUrls: ["./scanner.component.scss"],
+    standalone: true,
+    imports: [NgIf, MatFormFieldModule, MatSelectModule, FormsModule, MatOptionModule, NgFor, MatButtonModule, MatIconModule, NgxScannerQrcodeModule]
 })
 export class ScannerComponent implements AfterViewInit {
   @Output() exitScan: EventEmitter<string> = new EventEmitter<string>();

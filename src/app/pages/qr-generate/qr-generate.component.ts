@@ -1,11 +1,18 @@
 import {Component, OnInit} from "@angular/core";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {City, Item} from "../../models/item.model";
+import { NgxKjuaModule } from "ngx-kjua";
+import { MatOptionModule } from "@angular/material/core";
+import { NgFor } from "@angular/common";
+import { MatSelectModule } from "@angular/material/select";
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 @Component({
-  selector: "app-qr-generate",
-  templateUrl: "./qr-generate.component.html",
-  styleUrls: ["./qr-generate.component.scss"]
+    selector: "app-qr-generate",
+    templateUrl: "./qr-generate.component.html",
+    styleUrls: ["./qr-generate.component.scss"],
+    standalone: true,
+    imports: [MatFormFieldModule, MatSelectModule, NgFor, MatOptionModule, NgxKjuaModule]
 })
 export class QrGenerateComponent implements OnInit {
   public itemList?: Item[];

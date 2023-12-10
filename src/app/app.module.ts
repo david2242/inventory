@@ -35,48 +35,46 @@ import {ScannerComponent} from "./components/scanner/scanner.component";
 import {QrGenerateComponent} from "./pages/qr-generate/qr-generate.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AddItemComponent,
-    InventoryListComponent,
-    ItemCardComponent,
-    NavbarComponent,
-    ScannerComponent,
-    QrGenerateComponent
-  ],
-  imports: [
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    AppRoutingModule,
-    AuthModule.forRoot(environment.authModule),
-    BrowserAnimationsModule,
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatDialogModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSelectModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    NgxKjuaModule,
-    NgxScannerQrcodeModule,
-    ReactiveFormsModule
-  ],
-  providers: [
-    {
-      provide: LOCALE_ID,
-      useValue: "hu-HU"
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    imports: [
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
+        AngularFirestoreModule,
+        AppRoutingModule,
+        AuthModule.forRoot(environment.authModule),
+        BrowserAnimationsModule,
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatDialogModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSelectModule,
+        MatSlideToggleModule,
+        MatSnackBarModule,
+        NgxKjuaModule,
+        NgxScannerQrcodeModule,
+        ReactiveFormsModule,
+        AddItemComponent,
+        InventoryListComponent,
+        ItemCardComponent,
+        NavbarComponent,
+        ScannerComponent,
+        QrGenerateComponent
+    ],
+    providers: [
+        {
+            provide: LOCALE_ID,
+            useValue: "hu-HU"
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

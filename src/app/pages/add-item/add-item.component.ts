@@ -1,16 +1,24 @@
 import {Component, OnInit} from "@angular/core";
-import {FormControl, FormGroup} from "@angular/forms";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {City, Item} from "../../models/item.model";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserService} from "../../services/user.service";
+import { MatButtonModule } from "@angular/material/button";
+import { MatOptionModule } from "@angular/material/core";
+import { MatSelectModule } from "@angular/material/select";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { NgIf } from "@angular/common";
 
 
 @Component({
-  selector: "app-add-item",
-  templateUrl: "./add-item.component.html",
-  styleUrls: ["./add-item.component.scss"]
+    selector: "app-add-item",
+    templateUrl: "./add-item.component.html",
+    styleUrls: ["./add-item.component.scss"],
+    standalone: true,
+    imports: [NgIf, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatOptionModule, MatButtonModule]
 })
 export class AddItemComponent implements OnInit {
 

@@ -1,13 +1,17 @@
 import {Component, Inject} from "@angular/core";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from "@angular/material/dialog";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DialogDataItem} from "../../models/item.model";
+import { MatButtonModule } from "@angular/material/button";
+import { NgIf, DatePipe } from "@angular/common";
 
 @Component({
-  selector: "app-item-card",
-  templateUrl: "./item-card.component.html",
-  styleUrls: ["./item-card.component.scss"]
+    selector: "app-item-card",
+    templateUrl: "./item-card.component.html",
+    styleUrls: ["./item-card.component.scss"],
+    standalone: true,
+    imports: [MatDialogModule, NgIf, MatButtonModule, DatePipe]
 })
 export class ItemCardComponent {
 
