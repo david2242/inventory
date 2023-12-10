@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { FirestoreCrudService } from './firestore-crud.service';
+import { FirestoreCrudService } from "./firestore-crud.service";
 
-describe('FirestoreCrudService', () => {
+describe("FirestoreCrudService", () => {
   let service: FirestoreCrudService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('FirestoreCrudService', () => {
     service = TestBed.inject(FirestoreCrudService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

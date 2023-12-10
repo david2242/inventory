@@ -1,13 +1,13 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DialogDataItem} from "../../models/item.model";
 
 @Component({
-  selector: 'app-item-card',
-  templateUrl: './item-card.component.html',
-  styleUrls: ['./item-card.component.scss']
+  selector: "app-item-card",
+  templateUrl: "./item-card.component.html",
+  styleUrls: ["./item-card.component.scss"]
 })
 export class ItemCardComponent {
 
@@ -29,6 +29,6 @@ export class ItemCardComponent {
     const currentDate = Date.now();
     this.data.item.stockTaking ? this.data.item.stockTaking.push(currentDate) : this.data.item.stockTaking = [currentDate]
     this.firestore.updateStocking(this.data.item.customID, this.data.item.stockTaking)
-      .then(() => this.matSnackBar.open('Leltározva!', (new Date(currentDate)).toLocaleString()));
+      .then(() => this.matSnackBar.open("Leltározva!", (new Date(currentDate)).toLocaleString()));
   }
 }

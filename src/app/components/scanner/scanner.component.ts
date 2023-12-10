@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Output, ViewChild} from "@angular/core";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {Item} from "../../models/item.model";
 import {DialogService} from "../../services/dialog.service";
@@ -7,14 +7,14 @@ import {NgxScannerQrcodeComponent, ScannerQRCodeResult} from "ngx-scanner-qrcode
 
 
 @Component({
-  selector: 'app-scanner',
-  templateUrl: './scanner.component.html',
-  styleUrls: ['./scanner.component.scss']
+  selector: "app-scanner",
+  templateUrl: "./scanner.component.html",
+  styleUrls: ["./scanner.component.scss"]
 })
 export class ScannerComponent implements AfterViewInit {
   @Output() exitScan: EventEmitter<string> = new EventEmitter<string>();
   @Output() scanDone = new EventEmitter;
-  @ViewChild('action') scanner!: NgxScannerQrcodeComponent;
+  @ViewChild("action") scanner!: NgxScannerQrcodeComponent;
   loading = true;
   getItemSubscription?: Subscription;
 
@@ -39,7 +39,7 @@ export class ScannerComponent implements AfterViewInit {
         }
       }
     )
-    console.log('scanSuccess ran! ' + id);
+    console.log("scanSuccess ran! " + id);
   }
 
   onEvent($event: ScannerQRCodeResult[]) {

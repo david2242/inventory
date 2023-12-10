@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
+import {Injectable} from "@angular/core";
 import {AuthService} from "@auth0/auth0-angular";
 import {BehaviorSubject} from "rxjs";
 import {Router} from "@angular/router";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class UserService {
 
@@ -17,7 +17,7 @@ export class UserService {
     this.auth.isAuthenticated$.subscribe(isAuthenticated => {
       this.loggedIn$.next(isAuthenticated);
       this.loggedIn = isAuthenticated;
-      this.router.navigate(['list'])
+      this.router.navigate(["list"])
     });
   }
 }

@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { QrGenerateComponent } from './qr-generate.component';
+import { QrGenerateComponent } from "./qr-generate.component";
 
-describe('QrGenerateComponent', () => {
+describe("QrGenerateComponent", () => {
   let component: QrGenerateComponent;
   let fixture: ComponentFixture<QrGenerateComponent>;
 
@@ -17,7 +17,7 @@ describe('QrGenerateComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

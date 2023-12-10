@@ -1,37 +1,29 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {FormControl, FormGroup} from "@angular/forms";
 import {City, Item} from "../../models/item.model";
-import {User} from "../../models/user.model";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {ActivatedRoute} from "@angular/router";
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {UserService} from "../../services/user.service";
 
 
 @Component({
-  selector: 'app-add-item',
-  templateUrl: './add-item.component.html',
-  styleUrls: ['./add-item.component.scss']
+  selector: "app-add-item",
+  templateUrl: "./add-item.component.html",
+  styleUrls: ["./add-item.component.scss"]
 })
 export class AddItemComponent implements OnInit {
 
-  private actualUser: User = {
-    firstName: 'Katalin',
-    lastName: 'Nagy',
-    role: 'vezető'
-  }
+  private actualUser?: string;
 
   private actualRecord: Item = {
-    name: '',
+    name: "",
     customID: undefined,
     city: City.CECE,
-    room: '',
-    description: '',
+    room: "",
+    description: "",
     createdTime: 0,
-    createdBy: {
-      firstName: '',
-      lastName: '',
-      role: ''
-    },
+    createdBy: "",
     active: true
   }
 
@@ -41,20 +33,20 @@ export class AddItemComponent implements OnInit {
   constructor(
     private firestoreService: FirestoreCrudService,
     private route: ActivatedRoute,
-    private _snackBar: MatSnackBar) {
-
+    private _snackBar: MatSnackBar,
+    private user: UserService) {
   }
 
   public recordForm = new FormGroup({
     customID: new FormControl<string | undefined>(undefined, {nonNullable: true}),
-    name: new FormControl<string>('', {nonNullable: true}),
+    name: new FormControl<string>("", {nonNullable: true}),
     city: new FormControl<City>(City.CECE, {nonNullable: true}),
-    room: new FormControl<string>('', {nonNullable: true}),
-    description: new FormControl<string>('', {nonNullable: true}),
+    room: new FormControl<string>("", {nonNullable: true}),
+    description: new FormControl<string>("", {nonNullable: true}),
     active: new FormControl<boolean>(true, {nonNullable: true}),
   })
 
-  myObserver = {
+  formPatcher = {
     next: (data: Item | undefined) => {
       if (data) {
           this.recordForm.patchValue({
@@ -64,27 +56,32 @@ export class AddItemComponent implements OnInit {
             room: data.room,
             description: data.description,
           });
-        } else console.warn("Such item doesn't exists in inventory!");
+        } else {
+        this._snackBar.open("Hiba az elem lehívása során", "", {
+          horizontalPosition: "center",
+          verticalPosition: "top"
+        })
+      }
     },
     error: (err: Error) => console.error(err),
-    complete: () => console.log('Observer got a complete notification')
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.user.loggedInUser$.subscribe(user => this.actualUser = user)
+    this.id = this.route.snapshot.paramMap.get("id");
     if (this.id) {
       this.editMode = true;
-      this.firestoreService.getItem(this.id).subscribe(this.myObserver)
+      this.firestoreService.getItem(this.id).subscribe(this.formPatcher)
     }
   }
 
   addItem() {
     this.actualRecord = this.recordForm.getRawValue();
     this.actualRecord.createdTime = Date.now();
-    this.actualRecord.createdBy = this.actualUser;
+    this.actualRecord.createdBy = this.actualUser ? this.actualUser : "";
     this.firestoreService.addItem(this.actualRecord)
       .then(() => {
-        this._snackBar.open(`Sikeresen hozzáadtad: ${this.actualRecord.name}`, 'Ok',{
+        this._snackBar.open(`Sikeresen hozzáadtad: ${this.actualRecord.name}`, "Ok",{
           horizontalPosition: "center",
           verticalPosition: "top",
         });
@@ -102,7 +99,7 @@ export class AddItemComponent implements OnInit {
     this.actualRecord.modifiedBy = this.actualUser;
     this.firestoreService.updateItem(this.id, this.actualRecord)
       .then(() => {
-        this._snackBar.open(`Sikeresen módosítottad: ${this.actualRecord.name}`, 'Ok',{
+        this._snackBar.open(`Sikeresen módosítottad: ${this.actualRecord.name}`, "Ok",{
           horizontalPosition: "center",
           verticalPosition: "top",
         });

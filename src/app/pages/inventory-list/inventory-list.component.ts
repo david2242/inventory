@@ -1,35 +1,34 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from "@angular/core";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {Router} from "@angular/router";
 import {City, Item} from "../../models/item.model";
 import {DialogService} from "../../services/dialog.service";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {Subscription} from "rxjs";
-import {User} from "../../models/user.model";
 import {MatAccordion} from "@angular/material/expansion";
 
 @Component({
-  selector: 'app-inventory-list',
-  templateUrl: './inventory-list.component.html',
-  styleUrls: ['./inventory-list.component.scss']
+  selector: "app-inventory-list",
+  templateUrl: "./inventory-list.component.html",
+  styleUrls: ["./inventory-list.component.scss"]
 })
 export class InventoryListComponent implements OnInit, OnDestroy {
   @ViewChild(MatAccordion) accordion!: MatAccordion;
   readonly breakpoint$ = this.breakpointObserver.observe([Breakpoints.Medium, Breakpoints.Small, Breakpoints.XSmall]);
   private displayNameMap = new Map([
-    [Breakpoints.XSmall, 'XSmall'],
-    [Breakpoints.Small, 'Small'],
-    [Breakpoints.Medium, 'Medium'],
+    [Breakpoints.XSmall, "XSmall"],
+    [Breakpoints.Small, "Small"],
+    [Breakpoints.Medium, "Medium"],
   ]);
-  public currentScreenSize = '';
+  public currentScreenSize = "";
   private breakpointSubscription?: Subscription;
   public thisYear = String((new Date()).getFullYear());
   public itemList!: Item[];
   public listToShow = this.itemList;
-  public cities: Array<City | ''> = Object.values(City);
+  public cities: Array<City | ""> = Object.values(City);
   public active = true;
   public cityOption?: City;
-  private allColumns: string[] = ['name', 'city', 'room', 'description', 'actions', 'state'];
+  private allColumns: string[] = ["name", "city", "room", "description", "actions", "state"];
   public displayedColumns: string[] = this.allColumns;
   public showScanner = false;
 
@@ -38,7 +37,7 @@ export class InventoryListComponent implements OnInit, OnDestroy {
     private router: Router,
     private dialogService: DialogService,
     private breakpointObserver: BreakpointObserver) {
-      this.cities.unshift('');
+      this.cities.unshift("");
   }
 
   ngOnDestroy(): void {
@@ -58,14 +57,14 @@ export class InventoryListComponent implements OnInit, OnDestroy {
 
         for (const query of Object.keys(result.breakpoints)) {
           if (result.breakpoints[query]) {
-            this.currentScreenSize = this.displayNameMap.get(query) ?? 'Unknown';
+            this.currentScreenSize = this.displayNameMap.get(query) ?? "Unknown";
           }
         }
         this.displayedColumns =  structuredClone(this.allColumns);
-        if (this.currentScreenSize == 'Small') {
+        if (this.currentScreenSize == "Small") {
           this.displayedColumns.splice(2, 2);
         }
-        if (this.currentScreenSize == 'XSmall') {
+        if (this.currentScreenSize == "XSmall") {
           this.displayedColumns.splice(1, 3);
         }
       })
@@ -78,7 +77,7 @@ export class InventoryListComponent implements OnInit, OnDestroy {
   }
 
   editItem(id: string) {
-    this.router.navigate(['item', id]);
+    this.router.navigate(["item", id]);
   }
 
   deleteItem(id: string) {
