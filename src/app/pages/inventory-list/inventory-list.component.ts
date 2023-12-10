@@ -5,12 +5,25 @@ import {City, Item} from "../../models/item.model";
 import {DialogService} from "../../services/dialog.service";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {Subscription} from "rxjs";
-import {MatAccordion} from "@angular/material/expansion";
+import { MatAccordion, MatExpansionModule } from "@angular/material/expansion";
+import { MatTableModule } from "@angular/material/table";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { FormsModule } from "@angular/forms";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { MatOptionModule } from "@angular/material/core";
+import { MatSelectModule } from "@angular/material/select";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
+import { ScannerComponent } from "../../components/scanner/scanner.component";
+import { NgIf, NgClass, NgFor, DatePipe } from "@angular/common";
 
 @Component({
-  selector: "app-inventory-list",
-  templateUrl: "./inventory-list.component.html",
-  styleUrls: ["./inventory-list.component.scss"]
+    selector: "app-inventory-list",
+    templateUrl: "./inventory-list.component.html",
+    styleUrls: ["./inventory-list.component.scss"],
+    standalone: true,
+    imports: [NgIf, ScannerComponent, NgClass, MatButtonModule, MatIconModule, MatFormFieldModule, MatSelectModule, NgFor, MatOptionModule, MatSlideToggleModule, FormsModule, MatExpansionModule, MatCheckboxModule, MatTableModule, DatePipe]
 })
 export class InventoryListComponent implements OnInit, OnDestroy {
   @ViewChild(MatAccordion) accordion!: MatAccordion;
