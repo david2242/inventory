@@ -50,9 +50,9 @@
     </mat-expansion-panel-header>
     <div class="expansion-panel-body">
       <table>
-        <tr><th>Rögzítette: </th><td>{{getFullName(item.createdBy)}}</td></tr>
+        <tr><th>Rögzítette: </th><td>{{item.createdBy}}</td></tr>
         <tr><th>Rögzítés ideje: </th><td>{{item.createdTime | date :'mediumDate' }}</td></tr>
-        <tr *ngIf="item.modifiedTime"><th>Módosította: </th><td>{{getFullName(item.modifiedBy)}}</td></tr>
+        <tr *ngIf="item.modifiedTime"><th>Módosította: </th><td>{{item.modifiedBy}}</td></tr>
         <tr *ngIf="item.modifiedTime"><th>Módosítás ideje</th><td>{{item.modifiedTime}}</td></tr>
         <tr><th>Város: </th><td>{{item.city}}</td></tr>
         <tr><th>Helység: </th><td>{{item.room}}</td></tr>

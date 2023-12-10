@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { InventoryListComponent } from './inventory-list.component';
+import { InventoryListComponent } from "./inventory-list.component";
 
-describe('InventoryListComponent', () => {
+describe("InventoryListComponent", () => {
   let component: InventoryListComponent;
   let fixture: ComponentFixture<InventoryListComponent>;
 
@@ -19,7 +19,7 @@ describe('InventoryListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

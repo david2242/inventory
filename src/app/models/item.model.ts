@@ -1,5 +1,3 @@
-import {User} from "./user.model";
-
 export interface Item {
   customID?: string
   active: boolean
@@ -9,8 +7,8 @@ export interface Item {
   description: string,
   createdTime?: number,
   modifiedTime?: number,
-  createdBy?: User,
-  modifiedBy?: User,
+  createdBy?: string,
+  modifiedBy?: string,
   stockTaking?: number[],
 }
 
@@ -20,12 +18,12 @@ export interface DialogDataItem {
 }
 
 export enum City {
-  ALAP = 'Alap',
-  ALSOSZENTIVAN = 'Alsószentiván',
-  CECE = 'Cece',
-  IGAR = 'Igar',
-  MEZOSZILAS = 'Mezőszilas',
-  SAREGRES = 'Sáregres',
-  SARSZENTAGOTA = 'Sárszentágota',
-  VAJTA = 'Vajta',
+  ALAP = "Alap",
+  ALSOSZENTIVAN = "Alsószentiván",
+  CECE = "Cece",
+  IGAR = "Igar",
+  MEZOSZILAS = "Mezőszilas",
+  SAREGRES = "Sáregres",
+  SARSZENTAGOTA = "Sárszentágota",
+  VAJTA = "Vajta",
 }

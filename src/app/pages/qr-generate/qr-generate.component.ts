@@ -1,20 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {FirestoreCrudService} from "../../services/firestore-crud.service";
 import {City, Item} from "../../models/item.model";
 
 @Component({
-  selector: 'app-qr-generate',
-  templateUrl: './qr-generate.component.html',
-  styleUrls: ['./qr-generate.component.scss']
+  selector: "app-qr-generate",
+  templateUrl: "./qr-generate.component.html",
+  styleUrls: ["./qr-generate.component.scss"]
 })
 export class QrGenerateComponent implements OnInit {
   public itemList?: Item[];
   public listToShow?: Item[];
-  public cities: Array<City | ''> = Object.values(City);
+  public cities: Array<City | ""> = Object.values(City);
   public cityOption?: City;
 
   constructor(private firestoreService: FirestoreCrudService) {
-    this.cities.unshift('');
+    this.cities.unshift("");
   }
 
   ngOnInit(): void {

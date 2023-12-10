@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { AddItemComponent } from './add-item.component';
+import { AddItemComponent } from "./add-item.component";
 
-describe('AddRecordComponent', () => {
+describe("AddRecordComponent", () => {
   let component: AddItemComponent;
   let fixture: ComponentFixture<AddItemComponent>;
 
@@ -19,7 +19,7 @@ describe('AddRecordComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

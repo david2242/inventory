@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {Item} from "../models/item.model";
 import {ItemCardComponent} from "../components/item-card/item-card.component";
 import {MatDialog} from "@angular/material/dialog";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class DialogService {
 
