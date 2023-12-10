@@ -1,4 +1,4 @@
-const environment = {
+export const environment = {
   firebase: {
     projectId: "halo-60249",
     appId: "1:124850108802:web:93d3b9ce6a8e8e0692f79b",
@@ -13,7 +13,7 @@ const environment = {
     clientId: "xCwzgZSB0ZMGmEG0nfah9Aa2X4Y2wdBo",
     authorizationParams: {
       redirect_uri: "http://localhost:4200"
-    },
-    production: true
-  }
+    }
+  },
+  production: true
 }
